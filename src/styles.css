@@ -336,6 +336,20 @@ body.director-mode-active .letterbox-bar {
   color: var(--gold-accent);
 }
 
+.action-pill-hire {
+  background: var(--gold-accent);
+  color: #0b0c10 !important;
+  font-weight: 700;
+  border-color: var(--gold-accent);
+  text-decoration: none;
+}
+
+.action-pill-hire:hover {
+  background: #e2ba7a;
+  box-shadow: 0 0 16px rgba(200, 162, 101, 0.5);
+  transform: translateY(-1px);
+}
+
 /* Main Studio Overlay Layout */
 .studio-overlay {
   position: fixed;
@@ -518,6 +532,27 @@ body.director-mode-active .carousel-hud {
   background: rgba(200, 162, 101, 0.15);
   border-color: var(--gold-accent);
   color: #fff;
+}
+
+.inspect-btn.btn-case-study {
+  grid-column: 1 / 3;
+  background: rgba(200, 162, 101, 0.15);
+  border-color: var(--gold-accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.inspect-btn.btn-case-study:hover {
+  background: var(--gold-accent);
+  color: #0b0c10;
+  box-shadow: 0 0 20px rgba(200, 162, 101, 0.4);
 }
 
 /* Center Bottom: Circular Carousel Rail Navigator */

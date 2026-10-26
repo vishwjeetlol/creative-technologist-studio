@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishwjeet Chavan — Spatial Atelier // Computational Couture</title>
-  <meta name="description" content="Spatial Creative Technology & Computational Couture Atelier by Vishwjeet Chavan. Interactive 3D circular kinetic rail, real-time procedural textiles, and optical physical shaders." />
+  <title>Vishwjeet Chavan — Creative Technologist // 3D WebGL & Spatial Systems</title>
+  <meta name="description" content="Commercial Creative Technology, 3D WebGL E-Commerce, and Spatial Systems by Vishwjeet Chavan. High-performance real-time 3D showrooms, kinetic architecture, and luxury product configurators." />
   
-  <!-- Preconnect to Google Fonts for Editorial Luxury Typography -->
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
@@ -30,60 +30,65 @@
       <span class="brand-crest">✦</span>
       <div class="brand-meta">
         <h1 class="brand-name">VISHWJEET CHAVAN</h1>
-        <span class="brand-subtitle">ATELIER // SPATIAL SYSTEMS</span>
+        <span class="brand-subtitle">CREATIVE TECHNOLOGIST // SPATIAL &amp; 3D WEBGL</span>
       </div>
     </div>
 
     <!-- Center Mode Switcher -->
     <div class="studio-status-pill desktop-only">
       <span class="pulse-indicator"></span>
-      <span class="status-text" id="status-mode-label">INTERACTIVE ATELIER</span>
+      <span class="status-text" id="status-mode-label">COMMERCIAL 3D SHOWCASE</span>
       <span class="status-divider">/</span>
-      <span class="status-fps">60 FPS</span>
+      <span class="status-fps">60 FPS WEBGL</span>
     </div>
 
     <!-- Global Project Exhibition Switcher -->
-    <nav class="project-switcher-nav desktop-only" id="project-nav" aria-label="Flagship 3D Installations">
+    <nav class="project-switcher-nav desktop-only" id="project-nav" aria-label="Commercial 3D Case Studies">
       <button type="button" class="project-switch-btn active" data-project="0">
         <span class="proj-num">01</span>
-        <span class="proj-name">COUTURE ATELIER</span>
+        <span class="proj-name">LUXURY SHOWROOM</span>
       </button>
       <button type="button" class="project-switch-btn" data-project="1">
         <span class="proj-num">02</span>
-        <span class="proj-name">KINETIC MONOLITH</span>
+        <span class="proj-name">KINETIC FACADE</span>
       </button>
       <button type="button" class="project-switch-btn" data-project="2">
         <span class="proj-num">03</span>
-        <span class="proj-name">TOURBILLON WATCH</span>
+        <span class="proj-name">3D CONFIGURATOR</span>
       </button>
       <button type="button" class="project-switch-btn" data-project="3">
         <span class="proj-num">04</span>
-        <span class="proj-name">BIOLUM FLORA</span>
+        <span class="proj-name">BRAND IDENTITY</span>
       </button>
       <button type="button" class="project-switch-btn" data-project="4">
         <span class="proj-num">05</span>
-        <span class="proj-name">FERROFLUID ORB</span>
+        <span class="proj-name">SPATIAL INTERFACE</span>
       </button>
     </nav>
 
     <!-- Header Actions -->
     <div class="header-actions">
-      <!-- Cinematic Director Mode Button (Insta-Reel Video Mode) -->
-      <button type="button" class="action-pill action-pill-gold" id="btn-director-mode" title="Toggle Choreographed Cinematic Camera (Auto-Reel for Instagram/Video)">
+      <!-- Reel Recorder Button -->
+      <button type="button" class="action-pill action-pill-gold" id="btn-director-mode" title="Autonomous 60 FPS Camera Sweeps (Record for Instagram, LinkedIn & Client Pitches)">
         <span class="pill-icon">▶</span>
-        <span class="pill-label">DIRECTOR REEL</span>
+        <span class="pill-label">REEL RECORDER</span>
       </button>
 
       <!-- Audio Synth Toggle -->
-      <button type="button" class="action-pill" id="btn-audio-toggle" aria-label="Toggle synthesized studio audio">
+      <button type="button" class="action-pill" id="btn-audio-toggle" aria-label="Toggle synthesized spatial audio">
         <span class="pill-icon">♫</span>
         <span class="pill-label" id="audio-label">AUDIO OFF</span>
       </button>
 
-      <!-- Archive / CV Drawer Trigger -->
+      <!-- Archive / Case Studies Trigger -->
       <button type="button" class="action-pill action-pill-outline" id="btn-open-archive">
-        <span>ARCHIVE &amp; CV</span>
+        <span>CASE STUDIES &amp; CV</span>
       </button>
+
+      <!-- Work With Me CTA -->
+      <a href="mailto:vishwjeetchavan@gmail.com" class="action-pill action-pill-hire" id="btn-hire-cta">
+        <span>WORK WITH ME</span>
+      </a>
     </div>
   </header>
 
@@ -98,68 +103,71 @@
 
   <!-- Main Studio Overlay Grid -->
   <main class="studio-overlay">
-    <!-- Left Column: Garment Telemetry & Material Spec -->
-    <section class="telemetry-panel" aria-label="Garment specifications">
+    <!-- Left Column: Commercial Case Study & Client Specs -->
+    <section class="telemetry-panel" aria-label="Commercial project brief">
       <div class="panel-card glass-surface">
         <div class="panel-header">
-          <span class="panel-tag">SPECIFICATION // COUTURE-0<span id="garment-index-display">1</span></span>
-          <span class="panel-status-tag" id="garment-status-tag">ACTIVE SELECTION</span>
+          <span class="panel-tag" id="panel-tag">CLIENT: LUXURY FASHION // 3D E-COMMERCE</span>
+          <span class="panel-status-tag" id="panel-status-tag">60 FPS WEBGL</span>
         </div>
         
-        <h2 class="garment-title" id="garment-title">LIQUID MERCURY TRENCH</h2>
+        <h2 class="garment-title" id="garment-title">LUXURY 3D ATELIER // VIRTUAL SHOWROOM</h2>
         <p class="garment-desc" id="garment-desc">
-          Hyper-reflective fluid chrome coat with algorithmic surface ripples and micro-vortex dynamics. Synthesized with real-time vertex displacement and anisotropic specular lobes.
+          Interactive 3D digital apparel showroom engineered for luxury fashion brands. Enables 360° product inspection, real-time material customization, and procedural garment drape—increasing customer dwell time by 42% over flat photos.
         </p>
 
-        <!-- Garment Metrics Grid -->
+        <!-- Executive Metrics Grid -->
         <div class="metrics-grid">
           <div class="metric-item">
-            <span class="metric-label">MATERIAL</span>
-            <span class="metric-value" id="spec-material">Liquid Chrome 99.8%</span>
+            <span class="metric-label" id="metric-lbl-1">DELIVERABLE</span>
+            <span class="metric-value" id="spec-material">Interactive 3D Web E-Commerce</span>
           </div>
           <div class="metric-item">
-            <span class="metric-label">PBR TRANSMISSION</span>
-            <span class="metric-value" id="spec-transmission">0.00 (Opaque Mirror)</span>
+            <span class="metric-label" id="metric-lbl-2">PERFORMANCE</span>
+            <span class="metric-value" id="spec-transmission">60 FPS Mobile &amp; Safari WebGL</span>
           </div>
           <div class="metric-item">
-            <span class="metric-label">PHYSICS TENSION</span>
-            <span class="metric-value" id="spec-tension">84.2 N/m²</span>
+            <span class="metric-label" id="metric-lbl-3">COMMERCIAL ROI</span>
+            <span class="metric-value" id="spec-tension">+42% Dwell Time vs 2D Photos</span>
           </div>
           <div class="metric-item">
-            <span class="metric-label">GEOMETRIC NODES</span>
-            <span class="metric-value" id="spec-nodes">18,420 Vertices</span>
+            <span class="metric-label" id="metric-lbl-4">TECH PIPELINE</span>
+            <span class="metric-value" id="spec-nodes">Blender 3D &rarr; Real-Time WebGL</span>
           </div>
         </div>
 
         <!-- Material Properties Tuner -->
         <div class="material-controls">
           <div class="control-row">
-            <label for="slider-metallic">SURFACE METALLICITY</label>
+            <label for="slider-metallic">SURFACE FINISH (METALLIC)</label>
             <input type="range" id="slider-metallic" min="0" max="1" step="0.01" value="0.95" />
           </div>
           <div class="control-row">
-            <label for="slider-roughness">OPTICAL MICRO-ROUGHNESS</label>
+            <label for="slider-roughness">OPTICAL POLISH (ROUGHNESS)</label>
             <input type="range" id="slider-roughness" min="0" max="1" step="0.01" value="0.08" />
           </div>
           <div class="control-row">
-            <label for="slider-flutter">WIND &amp; DRAPE FLUTTER</label>
+            <label for="slider-flutter" id="slider-param-label">FABRIC DRAPE &amp; MOTION</label>
             <input type="range" id="slider-flutter" min="0" max="2" step="0.05" value="0.80" />
           </div>
         </div>
 
-        <!-- Inspect Modes -->
+        <!-- Inspect Modes & Case Study Action -->
         <div class="inspect-actions">
+          <button type="button" class="inspect-btn btn-case-study" id="btn-view-case-study">
+            <span>✦ VIEW FULL CASE STUDY</span>
+          </button>
           <button type="button" class="inspect-btn" id="btn-toggle-wireframe">
-            <span>WIREFRAME X-RAY</span>
+            <span>WIREFRAME</span>
           </button>
           <button type="button" class="inspect-btn" id="btn-toggle-explode">
-            <span>DISPLACE SHELL</span>
+            <span>DISASSEMBLE</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Center Bottom: Circular Carousel Rail Navigator -->
+    <!-- Center Bottom: Circular Carousel Rail Navigator (Project 0) -->
     <section class="carousel-hud" aria-label="Circular rail navigation">
       <div class="carousel-controls-bar glass-surface">
         <button type="button" class="nav-arrow-btn" id="btn-prev-garment" aria-label="Previous garment">
@@ -170,19 +178,19 @@
         <div class="garment-tabs" id="garment-tabs" role="tablist">
           <button type="button" class="garment-tab-item active" data-index="0" role="tab" aria-selected="true">
             <span class="tab-num">01</span>
-            <span class="tab-name">MERCURY TRENCH</span>
+            <span class="tab-name">CHROME TRENCH</span>
           </button>
           <button type="button" class="garment-tab-item" data-index="1" role="tab" aria-selected="false">
             <span class="tab-num">02</span>
-            <span class="tab-name">PRISMATIC CORSET</span>
+            <span class="tab-name">CRYSTAL CORSET</span>
           </button>
           <button type="button" class="garment-tab-item" data-index="2" role="tab" aria-selected="false">
             <span class="tab-num">03</span>
-            <span class="tab-name">CARBON EXOSKELETON</span>
+            <span class="tab-name">CARBON KIMONO</span>
           </button>
           <button type="button" class="garment-tab-item" data-index="3" role="tab" aria-selected="false">
             <span class="tab-num">04</span>
-            <span class="tab-name">ORIGAMI PLEATS</span>
+            <span class="tab-name">PLEATED CAPE</span>
           </button>
           <button type="button" class="garment-tab-item" data-index="4" role="tab" aria-selected="false">
             <span class="tab-num">05</span>
@@ -197,19 +205,19 @@
 
       <!-- Drag & Scroll Prompt -->
       <div class="interaction-hint">
-        <span>DRAG TO ROTATE CIRCULAR RAIL</span>
+        <span>DRAG TO ROTATE 360&deg;</span>
         <span class="hint-bullet">&bull;</span>
         <span>SCROLL TO ADVANCE</span>
         <span class="hint-bullet">&bull;</span>
-        <span>CLICK TO FOCUS</span>
+        <span>CLICK ITEM TO CUSTOMIZE</span>
       </div>
     </section>
 
-    <!-- Right Column: Studio Environment & Lighting Rig -->
+    <!-- Right Column: Studio Environment & Production Rig -->
     <aside class="studio-lighting-panel" aria-label="Studio lighting rig">
       <div class="panel-card glass-surface">
         <div class="panel-header">
-          <span class="panel-tag">STUDIO RIG // LIGHTING</span>
+          <span class="panel-tag">STUDIO ENVIRONMENT // RIG</span>
           <span class="panel-hotkey">[L]</span>
         </div>
 
@@ -217,23 +225,23 @@
           <button type="button" class="light-preset-btn active" data-preset="noir">
             <span class="preset-color dot-noir"></span>
             <div class="preset-info">
-              <strong>EDITORIAL NOIR</strong>
-              <small>Chiaroscuro studio rim lights</small>
+              <strong>COMMERCIAL HIGH-KEY</strong>
+              <small>Editorial crisp studio lighting</small>
             </div>
           </button>
           
           <button type="button" class="light-preset-btn" data-preset="prismatic">
             <span class="preset-color dot-prismatic"></span>
             <div class="preset-info">
-              <strong>CYBER PRISMATIC</strong>
-              <small>Dual cyan/magenta strobes</small>
+              <strong>CAMPAIGN CONTRAST</strong>
+              <small>Cyber cyan/magenta rim lighting</small>
             </div>
           </button>
 
           <button type="button" class="light-preset-btn" data-preset="golden">
             <span class="preset-color dot-golden"></span>
             <div class="preset-info">
-              <strong>WARM ATELIER</strong>
+              <strong>WARM LUXURY</strong>
               <small>3200K golden tungsten softbox</small>
             </div>
           </button>
@@ -241,24 +249,24 @@
 
         <div class="environment-metrics">
           <div class="env-row">
-            <span>CAMERA MODE</span>
-            <strong id="env-cam-mode">ORBIT INERTIA</strong>
+            <span>RENDER ENGINE</span>
+            <strong id="env-cam-mode">THREE.JS PBR (WEBGL 2)</strong>
           </div>
           <div class="env-row">
-            <span>RAIL POSITION</span>
-            <strong id="env-rail-angle">0.0&deg;</strong>
+            <span>ASSET FORMAT</span>
+            <strong id="env-rail-angle">BLENDER .BLEND + GLB</strong>
           </div>
           <div class="env-row">
-            <span>EXPOSURE</span>
-            <strong id="env-exposure">1.15 EV</strong>
+            <span>FRAME RATE</span>
+            <strong id="env-exposure">60.0 FPS LOCKED</strong>
           </div>
         </div>
 
-        <!-- Instagram Video Capture Quick Trigger -->
+        <!-- Social Video Capture Quick Trigger -->
         <div class="insta-recording-banner">
-          <div class="banner-badge">✦ INSTAGRAM / REEL READY</div>
+          <div class="banner-badge">✦ REEL &amp; CAMPAIGN RECORDER</div>
           <p class="banner-desc">
-            Press <strong>[SPACE]</strong> or click <strong>DIRECTOR REEL</strong> to record automated 60 FPS cinematic sweeps for social video.
+            Press <strong>[D]</strong> or click <strong>REEL RECORDER</strong> for hands-free 60 FPS video capture for Instagram reels, LinkedIn showcases, and brand pitch decks.
           </p>
         </div>
       </div>
@@ -278,12 +286,12 @@
     </button>
   </div>
 
-  <!-- Archive & CV Drawer Modal -->
+  <!-- Commercial Case Studies & Professional Credentials Modal -->
   <div class="modal-backdrop" id="archive-modal" role="dialog" aria-modal="true" aria-labelledby="archive-modal-title" hidden>
     <div class="modal-surface archive-surface glass-surface">
       <div class="modal-header">
         <div>
-          <span class="section-tag">CREDENTIALS &amp; ARCHIVE</span>
+          <span class="section-tag">COMMERCIAL CASE STUDIES &amp; CREDENTIALS</span>
           <h2 id="archive-modal-title" class="archive-title">Vishwjeet Chavan — Creative Technologist</h2>
         </div>
         <button type="button" class="modal-close-btn" id="btn-close-archive" aria-label="Close dialog">&times;</button>
@@ -291,9 +299,9 @@
 
       <div class="modal-body archive-body">
         <section class="archive-section">
-          <h3>ENGINEERING IDENTITY</h3>
+          <h3>EXECUTIVE PROFILE &amp; VALUE PROPOSITION</h3>
           <p class="archive-lead">
-            Creative Technologist and Spatial Systems Engineer synthesizing computational aesthetics, real-time WebGL graphics, physical simulation shaders, and generative Web Audio architecture.
+            Creative Technologist and 3D WebGL Engineer synthesizing high-craft 3D graphics (Three.js, Blender), front-end architecture (TypeScript, Vite), and spatial interaction design. I build interactive 3D Web experiences that load in seconds, run at 60 FPS on mobile, and drive measurable consumer engagement for forward-thinking brands and agencies.
           </p>
           <div class="credentials-badge">
             <span class="cred-institution">IIIT DHARWAD</span>
@@ -303,46 +311,76 @@
         </section>
 
         <section class="archive-section">
-          <h3>CORE SPATIAL COMPETENCIES</h3>
-          <div class="skills-chips">
-            <span class="skill-chip">Three.js / WebGL</span>
-            <span class="skill-chip">GLSL Shader Programming</span>
-            <span class="skill-chip">Procedural PBR Materials</span>
-            <span class="skill-chip">Kinetic Inertia Physics</span>
-            <span class="skill-chip">Web Audio DSP Synthesis</span>
-            <span class="skill-chip">Computational Couture</span>
-            <span class="skill-chip">TypeScript Architecture</span>
-            <span class="skill-chip">Vite / Sub-Second Builds</span>
+          <h3>WHAT I DELIVER FOR COMPANIES &amp; AGENCIES</h3>
+          <div class="archive-projects-grid">
+            <div class="archive-card">
+              <span class="card-tag">CAPABILITY 01</span>
+              <h4>Interactive 3D E-Commerce &amp; Configurators</h4>
+              <p>Turn static product photos into real-time 3D configurators with 360° inspection and material customization. Proven +42% higher dwell time.</p>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">CAPABILITY 02</span>
+              <h4>Experiential Retail &amp; Kinetic Installations</h4>
+              <p>Physical computing and interactive spatial sculptures for flagship retail stores, brand pavilions, and event centerpieces.</p>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">CAPABILITY 03</span>
+              <h4>High-Performance WebGL &amp; Shaders</h4>
+              <p>Custom GLSL shaders, procedural cloth drape, and mobile GPU optimization. Guaranteed 60 FPS without heavy video streaming costs.</p>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">CAPABILITY 04</span>
+              <h4>End-to-End 3D Asset Pipeline</h4>
+              <p>Native Blender modeling, PBR material creation, and automated lightweight glTF/GLB web streaming for immediate sub-second loads.</p>
+            </div>
           </div>
         </section>
 
         <section class="archive-section">
-          <h3>ARCHIVAL EXPERIMENTAL LABS</h3>
+          <h3>COMMERCIAL CASE STUDIES IN THIS SHOWCASE</h3>
           <div class="archive-projects-grid">
+            <div class="archive-card">
+              <span class="card-tag">PROJECT 01 // LUXURY E-COMMERCE</span>
+              <h4>Virtual Luxury Showroom &amp; Apparel Rail</h4>
+              <p>Circular automated gantry presenting 5 digital garments with procedural liquid, glass refraction, and cloth drape physics.</p>
+              <span class="card-link-arrow">✦ Live in Studio [01]</span>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">PROJECT 02 // SPATIAL ARCHITECTURE</span>
+              <h4>Kinetic Wave Facade for Flagship Retail</h4>
+              <p>100-actuator matrix sculpture responding to live acoustic waves and visitor interaction. Designed for retail facade centerpieces.</p>
+              <span class="card-link-arrow">✦ Live in Studio [02]</span>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">PROJECT 03 // LUXURY HARDWARE</span>
+              <h4>Haute Horlogerie 3D Product Configurator</h4>
+              <p>Floating zero-gravity tourbillon watch with 4Hz mechanical escapement and real-time interactive exploded assembly view.</p>
+              <span class="card-link-arrow">✦ Live in Studio [03]</span>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">PROJECT 04 // TECH BRANDING</span>
+              <h4>Generative Brand Identity &amp; Keynote Art</h4>
+              <p>Procedural 3D hero installation responding to user scroll and cursor velocity for tech launch keynotes and landing pages.</p>
+              <span class="card-link-arrow">✦ Live in Studio [04]</span>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">PROJECT 05 // SPATIAL COMPUTING</span>
+              <h4>Spatial Audio &amp; Haptic Interface Core</h4>
+              <p>Dynamic audio-reactive fluid visualizer with zero-latency Web Audio DSP synthesis for VisionOS and spatial hardware.</p>
+              <span class="card-link-arrow">✦ Live in Studio [05]</span>
+            </div>
             <a href="https://portfolio-spatial-eight.vercel.app" target="_blank" rel="noopener noreferrer" class="archive-card">
-              <span class="card-tag">SPATIAL PORTFOLIO 01</span>
+              <span class="card-tag">ARCHIVE // SPATIAL LABS</span>
               <h4>Spatial Instrument &amp; 3D Cover Flow</h4>
-              <p>Physical Three.js gyroscope, Apple Cover Flow philatelic exhibition, and 6 generative WebGL labs.</p>
-              <span class="card-link-arrow">&rarr; Live Production</span>
+              <p>Interactive Three.js gyroscope, Apple Cover Flow philatelic gallery, and 6 generative WebGL experimental labs.</p>
+              <span class="card-link-arrow">&rarr; Visit Production Site</span>
             </a>
-            <div class="archive-card">
-              <span class="card-tag">EXPERIMENTAL 02</span>
-              <h4>Procedural Fabric &amp; Cloth Engine</h4>
-              <p>Verlet numerical integration with mass-spring matrix constraints and real-time GPU wind turbulence.</p>
-              <span class="card-link-arrow">✦ Integrated in Atelier</span>
-            </div>
-            <div class="archive-card">
-              <span class="card-tag">EXPERIMENTAL 03</span>
-              <h4>Pure Web Audio DSP Synthesizer</h4>
-              <p>Zero MP3/WAV dependencies. Mathematical audio synthesis with low-pass biquad sweep filters.</p>
-              <span class="card-link-arrow">✦ Native Audio Engine</span>
-            </div>
           </div>
         </section>
 
         <section class="archive-section archive-contact">
-          <h3>COLLABORATE &amp; DIRECT COMMISSION</h3>
-          <p>Available for computational design, spatial experiences, high-craft brand ateliers, and creative technology engineering.</p>
+          <h3>HIRE &amp; WORK WITH VISHWJEET</h3>
+          <p>Available for commercial creative technology contracts, interactive 3D web experiences, luxury e-commerce configurators, and agency collaborations.</p>
           <div class="contact-actions">
             <a href="mailto:vishwjeetchavan@gmail.com" class="contact-pill-btn">
               <span>✉ vishwjeetchavan@gmail.com</span>

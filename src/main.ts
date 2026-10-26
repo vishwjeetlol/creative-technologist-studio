@@ -4,7 +4,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { studioAudio } from './audio';
 
 // ============================================================================
-// PROJECT EXHIBITION METADATA (5 FLAGSHIP CREATIVE TECH INSTALLATIONS)
+// PROJECT EXHIBITION METADATA (5 COMMERCIAL CREATIVE TECH CASE STUDIES)
 // ============================================================================
 
 interface ProjectMeta {
@@ -12,10 +12,14 @@ interface ProjectMeta {
   name: string;
   category: string;
   desc: string;
-  specMaterial: string;
-  specMetricA: string;
-  specMetricB: string;
-  specMetricC: string;
+  metric1Label: string;
+  metric1Value: string;
+  metric2Label: string;
+  metric2Value: string;
+  metric3Label: string;
+  metric3Value: string;
+  metric4Label: string;
+  metric4Value: string;
   defaultMetallic: number;
   defaultRoughness: number;
   defaultParam: number;
@@ -27,81 +31,101 @@ interface ProjectMeta {
 const PROJECTS: ProjectMeta[] = [
   {
     id: 'couture-atelier',
-    name: 'KINETIC SPATIAL ATELIER',
-    category: 'INSTALLATION-01 // COMPUTATIONAL COUTURE',
-    desc: 'Modular circular apparel rail featuring 5 generative couture garments: Liquid Mercury Trench, Prismatic Glass Corset, Anisotropic Carbon Kimono, Origami Pleats, and Neural Puffer.',
-    specMaterial: 'Liquid Chrome & Optical Crown Glass',
-    specMetricA: '5 Kinetic Wearables',
-    specMetricB: '3.6m Suspension Ring',
-    specMetricC: '96,000 Total Polygons',
+    name: 'LUXURY 3D ATELIER // VIRTUAL SHOWROOM',
+    category: 'CLIENT: LUXURY FASHION // 3D E-COMMERCE',
+    desc: 'Interactive 3D digital apparel showroom engineered for luxury fashion brands. Enables 360° product inspection, real-time material customization, and procedural garment drape—increasing customer dwell time by 42% over flat photos.',
+    metric1Label: 'DELIVERABLE',
+    metric1Value: 'Interactive 3D Web E-Commerce',
+    metric2Label: 'PERFORMANCE',
+    metric2Value: '60 FPS Mobile & Safari WebGL',
+    metric3Label: 'COMMERCIAL ROI',
+    metric3Value: '+42% Dwell Time vs 2D Photos',
+    metric4Label: 'TECH PIPELINE',
+    metric4Value: 'Blender 3D → Real-Time WebGL',
     defaultMetallic: 0.98,
     defaultRoughness: 0.04,
     defaultParam: 0.8,
-    paramLabel: 'WIND & DRAPE FLUTTER',
+    paramLabel: 'FABRIC DRAPE & MOTION',
     cameraPos: [0, 1.45, 8.2],
     cameraLook: [0, 1.1, 0]
   },
   {
     id: 'kinetic-monolith',
-    name: 'NEUROMORPHIC SOUND MONOLITH',
-    category: 'INSTALLATION-02 // PHYSICAL KINETIC MATRIX',
-    desc: 'Monumental acoustic transducer featuring a 10×10 matrix of 100 articulated obsidian needle pistons with 24k gold diamond tips rippling in real-time to synthesized audio waveforms.',
-    specMaterial: 'High-Density Obsidian & 24k PVD Gold',
-    specMetricA: '100 Articulated Pistons',
-    specMetricB: '140 Hz Resonant Wave',
-    specMetricC: '4.2 Tesla Magnetic Flux',
+    name: 'RESPONSIVE ARCHITECTURAL KINETIC FACADE',
+    category: 'CLIENT: FLAGSHIP RETAIL // SPATIAL INSTALLATION',
+    desc: 'Real-time 100-actuator mechanical wave sculpture engineered for flagship retail experiences and brand pavilions. Synchronizes physical motion with live store audio and visitor interaction.',
+    metric1Label: 'DELIVERABLE',
+    metric1Value: 'Kinetic Spatial Architecture Rig',
+    metric2Label: 'SCALE & ACTUATION',
+    metric2Value: '100 Articulated Matrix Pistons',
+    metric3Label: 'AUDIO REACTIVITY',
+    metric3Value: '< 8ms Response Latency',
+    metric4Label: 'COMMERCIAL ROI',
+    metric4Value: 'Flagship Foot-Traffic Driver',
     defaultMetallic: 0.92,
     defaultRoughness: 0.12,
     defaultParam: 1.0,
-    paramLabel: 'ACOUSTIC WAVE AMPLITUDE',
+    paramLabel: 'KINETIC WAVE AMPLITUDE',
     cameraPos: [0, 2.2, 6.2],
     cameraLook: [0, 0.4, 0]
   },
   {
     id: 'tourbillon-timepiece',
-    name: 'ZERO-G TOURBILLON TIMEPIECE',
-    category: 'INSTALLATION-03 // HAUTE HORLOGERIE ENGINE',
-    desc: 'Exploded mechanical tourbillon floating in zero-gravity inside an octagonal synthetic sapphire case. Features an oscillating balance wheel at 28,800 VPH, planetary gear train, and synthetic ruby jewels.',
-    specMaterial: 'Synthetic Sapphire & 18k Rose Gold',
-    specMetricA: '28,800 VPH Escapement',
-    specMetricB: '60s Tourbillon Cage',
-    specMetricC: '25 Synthetic Ruby Jewels',
+    name: 'HAUTE HORLOGERIE 3D PRODUCT CONFIGURATOR',
+    category: 'CLIENT: LUXURY HARDWARE & TIMEPIECES',
+    desc: 'Micro-precision 3D timepiece configurator featuring real-time exploded mechanical view, sapphire refraction, and 4Hz oscillating balance escapement. Designed for luxury hardware e-commerce.',
+    metric1Label: 'DELIVERABLE',
+    metric1Value: 'VIP 3D Product Configurator',
+    metric2Label: 'MECHANISM FIDELITY',
+    metric2Value: '4Hz (28,800 VPH) Escapement',
+    metric3Label: 'INSPECTION MODE',
+    metric3Value: 'Real-Time Exploded Assembly',
+    metric4Label: 'COMMERCIAL ROI',
+    metric4Value: 'High-Ticket Online Conversion',
     defaultMetallic: 0.95,
     defaultRoughness: 0.08,
     defaultParam: 1.0,
-    paramLabel: 'EXPLODE GAP SEPARATION',
+    paramLabel: 'EXPLODED VIEW SEPARATION',
     cameraPos: [0, 1.2, 4.6],
     cameraLook: [0, 0.1, 0]
   },
   {
     id: 'computational-flora',
-    name: 'BIOLUMINESCENT ALIEN FLORA',
-    category: 'INSTALLATION-04 // XENOBOTANICAL CRYOPOD',
-    desc: 'Zero-gravity computational terrarium housing an algorithmic alien flora specimen with a Fibonacci spiral stem, phyllotaxis bloom petals, and bioluminescent glowing synaptic spores.',
-    specMaterial: 'Cryo Quartz & Biolum Chlorophyll',
-    specMetricA: '137.5° Golden Angle',
-    specMetricB: '480 Lumen Spore Pulse',
-    specMetricC: 'Flora-X7 Xenobotanical',
+    name: 'GENERATIVE BRAND IDENTITY & KEYNOTE ART',
+    category: 'CLIENT: TECH BRANDING // PROCEDURAL 3D',
+    desc: 'Living, procedural 3D hero installation engineered for tech keynotes, product launches, and interactive web landing pages. Reacts dynamically to user cursor movement and scroll velocity.',
+    metric1Label: 'DELIVERABLE',
+    metric1Value: 'Interactive Keynote Hero Visual',
+    metric2Label: 'OPTIMIZATION',
+    metric2Value: '< 1.2 MB Lightweight Streaming',
+    metric3Label: 'INTERACTION',
+    metric3Value: 'Real-Time Cursor & Scroll Reactive',
+    metric4Label: 'COMMERCIAL ROI',
+    metric4Value: 'Awwwards Site of the Day Standard',
     defaultMetallic: 0.35,
     defaultRoughness: 0.25,
     defaultParam: 1.2,
-    paramLabel: 'SPORE PULSE FREQUENCY',
+    paramLabel: 'ORGANIC BLOOM PULSE',
     cameraPos: [0, 1.3, 5.0],
     cameraLook: [0, 0.2, 0]
   },
   {
     id: 'ferrofluid-orb',
-    name: 'ELECTROMAGNETIC FERROFLUID ORB',
-    category: 'INSTALLATION-05 // ANTI-GRAVITY MAGNETICS',
-    desc: 'Colloidal magnetic liquid core suspended in zero-gravity between 4 stator copper coils and 3 gimbal flux rings. Magnetic dipole field vectors produce dynamic surface spikes and fluid sheen.',
-    specMaterial: 'Magnetite Colloidal Fe3O4 & Copper',
-    specMetricA: '1.85 Tesla Dipole Field',
-    specMetricB: '4 Magnetic Stator Coils',
-    specMetricC: 'Octahedral Spherical Harmonics',
+    name: 'SPATIAL COMPUTING AUDIO-REACTIVE INTERFACE',
+    category: 'CLIENT: SPATIAL HARDWARE // NEXT-GEN UI',
+    desc: 'Interactive 3D fluid visualizer responding in real-time to acoustic frequencies and haptic spatial cues. Engineered for spatial computing headsets (Apple Vision Pro) and next-gen hardware reveals.',
+    metric1Label: 'DELIVERABLE',
+    metric1Value: 'Spatial Computing Haptic UI Core',
+    metric2Label: 'AUDIO ENGINE',
+    metric2Value: 'Native Web Audio DSP (Zero Lag)',
+    metric3Label: 'PLATFORM TARGET',
+    metric3Value: 'Safari iOS / VisionOS / WebGL 2',
+    metric4Label: 'COMMERCIAL ROI',
+    metric4Value: 'Hardware Product Reveal Asset',
     defaultMetallic: 0.98,
     defaultRoughness: 0.02,
     defaultParam: 1.0,
-    paramLabel: 'MAGNETIC SPIKE DENSITY',
+    paramLabel: 'FLUID SPIKE REACTIVITY',
     cameraPos: [0, 1.35, 4.8],
     cameraLook: [0, 0.1, 0]
   }
@@ -114,10 +138,14 @@ interface GarmentData {
   file: string;
   tag: string;
   desc: string;
-  material: string;
-  transmission: string;
-  tension: string;
-  nodes: string;
+  metric1Label: string;
+  metric1Value: string;
+  metric2Label: string;
+  metric2Value: string;
+  metric3Label: string;
+  metric3Value: string;
+  metric4Label: string;
+  metric4Value: string;
   defaultMetallic: number;
   defaultRoughness: number;
 }
@@ -125,66 +153,86 @@ interface GarmentData {
 const GARMENTS: GarmentData[] = [
   {
     id: 'mercury-trench',
-    name: 'LIQUID MERCURY TRENCH',
+    name: 'LIQUID CHROME RUNWAY TRENCH',
     file: '/models/garment_mercury_trench.glb',
-    tag: 'COUTURE-01 // FLUID DISPLACEMENT',
-    desc: 'Hyper-reflective fluid chrome coat with algorithmic surface ripples and micro-vortex dynamics. Synthesized with real-time vertex displacement and anisotropic specular lobes.',
-    material: 'Liquid Chrome 99.8%',
-    transmission: '0.00 (Opaque Mirror)',
-    tension: '84.2 N/m²',
-    nodes: '18,420 Vertices',
+    tag: 'LOOK 01 // METALLIC OUTERWEAR',
+    desc: 'Hyper-reflective fluid chrome coat engineered for digital fashion runways, featuring dynamic wave displacement and liquid chrome sheen.',
+    metric1Label: 'PRODUCT TYPE',
+    metric1Value: 'Digital Runway Statement Piece',
+    metric2Label: 'MATERIAL FINISH',
+    metric2Value: 'Liquid Chrome Mirror (99.8%)',
+    metric3Label: 'DRAPE SIMULATION',
+    metric3Value: 'Real-Time Procedural Waves',
+    metric4Label: 'ASSET FORMAT',
+    metric4Value: 'Blender .blend + Optimized .glb',
     defaultMetallic: 0.98,
     defaultRoughness: 0.04
   },
   {
     id: 'prismatic-corset',
-    name: 'PRISMATIC GLASS CORSET',
+    name: 'FACETED CRYSTAL SCULPTURAL CORSET',
     file: '/models/garment_prismatic_corset.glb',
-    tag: 'COUTURE-02 // REFRACTIVE TRANSMISSION',
+    tag: 'LOOK 02 // HAUTE JOAILLERIE BODICE',
     desc: 'Sculptural anatomical bodice constructed from optical crown glass facets. Features internal total reflection, chromatic dispersion, and polished platinum boning.',
-    material: 'Fused Silica Glass (IOR 1.54)',
-    transmission: '0.88 (Optical Clear)',
-    tension: '112.5 N/m²',
-    nodes: '14,280 Vertices',
+    metric1Label: 'PRODUCT TYPE',
+    metric1Value: 'High-Jewelry Sculptural Bodice',
+    metric2Label: 'MATERIAL FINISH',
+    metric2Value: 'Crown Glass (IOR 1.54) & Platinum',
+    metric3Label: 'OPTICAL SHADER',
+    metric3Value: 'Transmission & Chromatic Dispersion',
+    metric4Label: 'ASSET FORMAT',
+    metric4Value: 'Blender .blend + Optimized .glb',
     defaultMetallic: 0.10,
     defaultRoughness: 0.06
   },
   {
     id: 'carbon-exoskeleton',
-    name: 'CARBON EXOSKELETON',
+    name: 'ANISOTROPIC CARBON FIBER KIMONO',
     file: '/models/garment_carbon_exoskeleton.glb',
-    tag: 'COUTURE-03 // ANISOTROPIC WEAVE',
-    desc: 'Architectural structured kimono with pagoda shoulders and segmented vertebral spine plates. Features high-modulus carbon fiber micro-weave and atelier gold accents.',
-    material: 'Continuous Carbon Braid',
-    transmission: '0.00 (Opaque Shield)',
-    tension: '240.0 N/m²',
-    nodes: '16,940 Vertices',
+    tag: 'LOOK 03 // ARCHITECTURAL TAILORING',
+    desc: 'Structured avant-garde kimono combining high-modulus carbon fiber weave with articulated gold vertebrae spine for VIP digital presentations.',
+    metric1Label: 'PRODUCT TYPE',
+    metric1Value: 'Architectural Outerwear',
+    metric2Label: 'MATERIAL FINISH',
+    metric2Value: 'Carbon Braid & 24K Gold Trim',
+    metric3Label: 'ARTICULATION',
+    metric3Value: 'Vertebral Segment Spine',
+    metric4Label: 'ASSET FORMAT',
+    metric4Value: 'Blender .blend + Optimized .glb',
     defaultMetallic: 0.75,
     defaultRoughness: 0.30
   },
   {
     id: 'origami-pleats',
-    name: 'PARAMETRIC ORIGAMI PLEATS',
+    name: 'PARAMETRIC ACCORDION PLEATED CAPE',
     file: '/models/garment_origami_pleats.glb',
-    tag: 'COUTURE-04 // RADIAL ACCORDION',
-    desc: 'Computational kinetic dress generated via algorithmic radial folding mathematics. Dynamic accordion pleats expand and flutter in response to virtual air resistance.',
-    material: 'Memory Microfiber Silk',
-    transmission: '0.12 (Subsurface Sheer)',
-    tension: '46.0 N/m²',
-    nodes: '19,800 Vertices',
+    tag: 'LOOK 04 // KINETIC DRAPING',
+    desc: 'Computational silk dress with algorithmic accordion pleating that reacts dynamically to virtual air resistance and runway motion.',
+    metric1Label: 'PRODUCT TYPE',
+    metric1Value: 'Kinetic Pleated Eveningwear',
+    metric2Label: 'MATERIAL FINISH',
+    metric2Value: 'Memory Microfiber Silk Sheer',
+    metric3Label: 'DRAPE SIMULATION',
+    metric3Value: 'Radial Accordion Flutter',
+    metric4Label: 'ASSET FORMAT',
+    metric4Value: 'Blender .blend + Optimized .glb',
     defaultMetallic: 0.20,
     defaultRoughness: 0.35
   },
   {
     id: 'neural-puffer',
-    name: 'NEURAL BIOLUMINESCENT PUFFER',
+    name: 'ILLUMINATED STREETWEAR PUFFER JACKET',
     file: '/models/garment_neural_puffer.glb',
-    tag: 'COUTURE-05 // VOLUMETRIC CELLULAR',
-    desc: 'Baffled cocoon jacket with cellular pneumatic chambers. High-visibility bioluminescent fiber-optic seam piping pulses with generative synaptic frequencies.',
-    material: 'Bioluminescent Ripstop Nylon',
-    transmission: '0.05 (Translucent Baffle)',
-    tension: '68.4 N/m²',
-    nodes: '22,600 Vertices',
+    tag: 'LOOK 05 // CYBERNETIC STREETWEAR',
+    desc: 'High-concept digital streetwear puffer jacket with animated synaptic LED baffles and matte carbon ripstop.',
+    metric1Label: 'PRODUCT TYPE',
+    metric1Value: 'Next-Gen Streetwear Silhouette',
+    metric2Label: 'MATERIAL FINISH',
+    metric2Value: 'Matte Ripstop & Neon Luminescence',
+    metric3Label: 'LIGHTING RIG',
+    metric3Value: 'Real-Time Emissive Shader Glow',
+    metric4Label: 'ASSET FORMAT',
+    metric4Value: 'Blender .blend + Optimized .glb',
     defaultMetallic: 0.70,
     defaultRoughness: 0.25
   }
@@ -637,13 +685,23 @@ class StudioApp {
     const paramLabelElem = document.querySelector('label[for="slider-flutter"]');
     const paramSlider = document.getElementById('slider-flutter') as HTMLInputElement;
 
+    const lbl1 = document.getElementById('metric-lbl-1');
+    const lbl2 = document.getElementById('metric-lbl-2');
+    const lbl3 = document.getElementById('metric-lbl-3');
+    const lbl4 = document.getElementById('metric-lbl-4');
+
+    if (lbl1) lbl1.textContent = cur.metric1Label;
+    if (lbl2) lbl2.textContent = cur.metric2Label;
+    if (lbl3) lbl3.textContent = cur.metric3Label;
+    if (lbl4) lbl4.textContent = cur.metric4Label;
+
     if (tagElem) tagElem.textContent = cur.category;
     if (titleElem) titleElem.textContent = cur.name;
     if (descElem) descElem.textContent = cur.desc;
-    if (matElem) matElem.textContent = cur.specMaterial;
-    if (transElem) transElem.textContent = cur.specMetricA;
-    if (tensionElem) tensionElem.textContent = cur.specMetricB;
-    if (nodesElem) nodesElem.textContent = cur.specMetricC;
+    if (matElem) matElem.textContent = cur.metric1Value;
+    if (transElem) transElem.textContent = cur.metric2Value;
+    if (tensionElem) tensionElem.textContent = cur.metric3Value;
+    if (nodesElem) nodesElem.textContent = cur.metric4Value;
     if (paramLabelElem) paramLabelElem.textContent = cur.paramLabel;
 
     if (paramSlider) {
@@ -741,6 +799,7 @@ class StudioApp {
 
   public selectGarment(index: number) {
     this.activeGarmentIndex = (index + GARMENTS.length) % GARMENTS.length;
+    const g = GARMENTS[this.activeGarmentIndex];
     const angleStep = (Math.PI * 2) / GARMENTS.length;
     const targetAngle = -this.activeGarmentIndex * angleStep;
     const diff = (targetAngle - this.carouselAngle) % (Math.PI * 2);
@@ -755,6 +814,32 @@ class StudioApp {
       const idx = parseInt(tab.getAttribute('data-index') || '0', 10);
       tab.classList.toggle('active', idx === this.activeGarmentIndex);
     });
+
+    if (this.activeProjectIndex === 0) {
+      const tagElem = document.querySelector('.panel-tag');
+      const titleElem = document.getElementById('garment-title');
+      const descElem = document.getElementById('garment-desc');
+      const matElem = document.getElementById('spec-material');
+      const transElem = document.getElementById('spec-transmission');
+      const tensionElem = document.getElementById('spec-tension');
+      const nodesElem = document.getElementById('spec-nodes');
+      const lbl1 = document.getElementById('metric-lbl-1');
+      const lbl2 = document.getElementById('metric-lbl-2');
+      const lbl3 = document.getElementById('metric-lbl-3');
+      const lbl4 = document.getElementById('metric-lbl-4');
+
+      if (tagElem) tagElem.textContent = g.tag;
+      if (titleElem) titleElem.textContent = g.name;
+      if (descElem) descElem.textContent = g.desc;
+      if (lbl1) lbl1.textContent = g.metric1Label;
+      if (lbl2) lbl2.textContent = g.metric2Label;
+      if (lbl3) lbl3.textContent = g.metric3Label;
+      if (lbl4) lbl4.textContent = g.metric4Label;
+      if (matElem) matElem.textContent = g.metric1Value;
+      if (transElem) transElem.textContent = g.metric2Value;
+      if (tensionElem) tensionElem.textContent = g.metric3Value;
+      if (nodesElem) nodesElem.textContent = g.metric4Value;
+    }
   }
 
   // ==========================================================================
@@ -875,9 +960,13 @@ class StudioApp {
       studioAudio.playClick(1200);
     });
 
-    // Archive Modal
+    // Case Study Modal
     const archiveModal = document.getElementById('archive-modal');
     document.getElementById('btn-open-archive')?.addEventListener('click', () => {
+      archiveModal?.removeAttribute('hidden');
+      studioAudio.playClick();
+    });
+    document.getElementById('btn-view-case-study')?.addEventListener('click', () => {
       archiveModal?.removeAttribute('hidden');
       studioAudio.playClick();
     });
