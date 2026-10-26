@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishwjeet Chavan — Spatial Atelier // Computational Couture</title>
+  <meta name="description" content="Spatial Creative Technology & Computational Couture Atelier by Vishwjeet Chavan. Interactive 3D circular kinetic rail, real-time procedural textiles, and optical physical shaders." />
+  
+  <!-- Preconnect to Google Fonts for Editorial Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body class="theme-noir">
+  <!-- WebGL 3D Canvas Container -->
+  <div id="webgl-container" aria-hidden="true"></div>
+
+  <!-- Noise Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Letterbox Framing Bar (Cinematic Mode) -->
+  <div class="letterbox-bar bar-top" aria-hidden="true"></div>
+  <div class="letterbox-bar bar-bottom" aria-hidden="true"></div>
+
+  <!-- Top Studio Navigation HUD -->
+  <header class="studio-header">
+    <div class="header-brand">
+      <span class="brand-crest">✦</span>
+      <div class="brand-meta">
+        <h1 class="brand-name">VISHWJEET CHAVAN</h1>
+        <span class="brand-subtitle">ATELIER // SPATIAL SYSTEMS</span>
+      </div>
+    </div>
+
+    <!-- Center Mode Switcher -->
+    <div class="studio-status-pill desktop-only">
+      <span class="pulse-indicator"></span>
+      <span class="status-text" id="status-mode-label">INTERACTIVE ATELIER</span>
+      <span class="status-divider">/</span>
+      <span class="status-fps">60 FPS</span>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <!-- Cinematic Director Mode Button (Insta-Reel Video Mode) -->
+      <button type="button" class="action-pill action-pill-gold" id="btn-director-mode" title="Toggle Choreographed Cinematic Camera (Auto-Reel for Instagram/Video)">
+        <span class="pill-icon">▶</span>
+        <span class="pill-label">DIRECTOR REEL</span>
+      </button>
+
+      <!-- Audio Synth Toggle -->
+      <button type="button" class="action-pill" id="btn-audio-toggle" aria-label="Toggle synthesized studio audio">
+        <span class="pill-icon">♫</span>
+        <span class="pill-label" id="audio-label">AUDIO OFF</span>
+      </button>
+
+      <!-- Archive / CV Drawer Trigger -->
+      <button type="button" class="action-pill action-pill-outline" id="btn-open-archive">
+        <span>ARCHIVE &amp; CV</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Viewport UI (Crosshairs & Frame Marks) -->
+  <div class="viewport-marks" aria-hidden="true">
+    <div class="corner-mark top-left"></div>
+    <div class="corner-mark top-right"></div>
+    <div class="corner-mark bottom-left"></div>
+    <div class="corner-mark bottom-right"></div>
+    <div class="center-crosshair"></div>
+  </div>
+
+  <!-- Main Studio Overlay Grid -->
+  <main class="studio-overlay">
+    <!-- Left Column: Garment Telemetry & Material Spec -->
+    <section class="telemetry-panel" aria-label="Garment specifications">
+      <div class="panel-card glass-surface">
+        <div class="panel-header">
+          <span class="panel-tag">SPECIFICATION // COUTURE-0<span id="garment-index-display">1</span></span>
+          <span class="panel-status-tag" id="garment-status-tag">ACTIVE SELECTION</span>
+        </div>
+        
+        <h2 class="garment-title" id="garment-title">LIQUID MERCURY TRENCH</h2>
+        <p class="garment-desc" id="garment-desc">
+          Hyper-reflective fluid chrome coat with algorithmic surface ripples and micro-vortex dynamics. Synthesized with real-time vertex displacement and anisotropic specular lobes.
+        </p>
+
+        <!-- Garment Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-label">MATERIAL</span>
+            <span class="metric-value" id="spec-material">Liquid Chrome 99.8%</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">PBR TRANSMISSION</span>
+            <span class="metric-value" id="spec-transmission">0.00 (Opaque Mirror)</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">PHYSICS TENSION</span>
+            <span class="metric-value" id="spec-tension">84.2 N/m²</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">GEOMETRIC NODES</span>
+            <span class="metric-value" id="spec-nodes">18,420 Vertices</span>
+          </div>
+        </div>
+
+        <!-- Material Properties Tuner -->
+        <div class="material-controls">
+          <div class="control-row">
+            <label for="slider-metallic">SURFACE METALLICITY</label>
+            <input type="range" id="slider-metallic" min="0" max="1" step="0.01" value="0.95" />
+          </div>
+          <div class="control-row">
+            <label for="slider-roughness">OPTICAL MICRO-ROUGHNESS</label>
+            <input type="range" id="slider-roughness" min="0" max="1" step="0.01" value="0.08" />
+          </div>
+          <div class="control-row">
+            <label for="slider-flutter">WIND &amp; DRAPE FLUTTER</label>
+            <input type="range" id="slider-flutter" min="0" max="2" step="0.05" value="0.80" />
+          </div>
+        </div>
+
+        <!-- Inspect Modes -->
+        <div class="inspect-actions">
+          <button type="button" class="inspect-btn" id="btn-toggle-wireframe">
+            <span>WIREFRAME X-RAY</span>
+          </button>
+          <button type="button" class="inspect-btn" id="btn-toggle-explode">
+            <span>DISPLACE SHELL</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Center Bottom: Circular Carousel Rail Navigator -->
+    <section class="carousel-hud" aria-label="Circular rail navigation">
+      <div class="carousel-controls-bar glass-surface">
+        <button type="button" class="nav-arrow-btn" id="btn-prev-garment" aria-label="Previous garment">
+          <span>&larr;</span>
+        </button>
+
+        <!-- Garment Quick Tabs -->
+        <div class="garment-tabs" id="garment-tabs" role="tablist">
+          <button type="button" class="garment-tab-item active" data-index="0" role="tab" aria-selected="true">
+            <span class="tab-num">01</span>
+            <span class="tab-name">MERCURY TRENCH</span>
+          </button>
+          <button type="button" class="garment-tab-item" data-index="1" role="tab" aria-selected="false">
+            <span class="tab-num">02</span>
+            <span class="tab-name">PRISMATIC CORSET</span>
+          </button>
+          <button type="button" class="garment-tab-item" data-index="2" role="tab" aria-selected="false">
+            <span class="tab-num">03</span>
+            <span class="tab-name">CARBON EXOSKELETON</span>
+          </button>
+          <button type="button" class="garment-tab-item" data-index="3" role="tab" aria-selected="false">
+            <span class="tab-num">04</span>
+            <span class="tab-name">ORIGAMI PLEATS</span>
+          </button>
+          <button type="button" class="garment-tab-item" data-index="4" role="tab" aria-selected="false">
+            <span class="tab-num">05</span>
+            <span class="tab-name">NEURAL PUFFER</span>
+          </button>
+        </div>
+
+        <button type="button" class="nav-arrow-btn" id="btn-next-garment" aria-label="Next garment">
+          <span>&rarr;</span>
+        </button>
+      </div>
+
+      <!-- Drag & Scroll Prompt -->
+      <div class="interaction-hint">
+        <span>DRAG TO ROTATE CIRCULAR RAIL</span>
+        <span class="hint-bullet">&bull;</span>
+        <span>SCROLL TO ADVANCE</span>
+        <span class="hint-bullet">&bull;</span>
+        <span>CLICK TO FOCUS</span>
+      </div>
+    </section>
+
+    <!-- Right Column: Studio Environment & Lighting Rig -->
+    <aside class="studio-lighting-panel" aria-label="Studio lighting rig">
+      <div class="panel-card glass-surface">
+        <div class="panel-header">
+          <span class="panel-tag">STUDIO RIG // LIGHTING</span>
+          <span class="panel-hotkey">[L]</span>
+        </div>
+
+        <div class="lighting-presets">
+          <button type="button" class="light-preset-btn active" data-preset="noir">
+            <span class="preset-color dot-noir"></span>
+            <div class="preset-info">
+              <strong>EDITORIAL NOIR</strong>
+              <small>Chiaroscuro studio rim lights</small>
+            </div>
+          </button>
+          
+          <button type="button" class="light-preset-btn" data-preset="prismatic">
+            <span class="preset-color dot-prismatic"></span>
+            <div class="preset-info">
+              <strong>CYBER PRISMATIC</strong>
+              <small>Dual cyan/magenta strobes</small>
+            </div>
+          </button>
+
+          <button type="button" class="light-preset-btn" data-preset="golden">
+            <span class="preset-color dot-golden"></span>
+            <div class="preset-info">
+              <strong>WARM ATELIER</strong>
+              <small>3200K golden tungsten softbox</small>
+            </div>
+          </button>
+        </div>
+
+        <div class="environment-metrics">
+          <div class="env-row">
+            <span>CAMERA MODE</span>
+            <strong id="env-cam-mode">ORBIT INERTIA</strong>
+          </div>
+          <div class="env-row">
+            <span>RAIL POSITION</span>
+            <strong id="env-rail-angle">0.0&deg;</strong>
+          </div>
+          <div class="env-row">
+            <span>EXPOSURE</span>
+            <strong id="env-exposure">1.15 EV</strong>
+          </div>
+        </div>
+
+        <!-- Instagram Video Capture Quick Trigger -->
+        <div class="insta-recording-banner">
+          <div class="banner-badge">✦ INSTAGRAM / REEL READY</div>
+          <p class="banner-desc">
+            Press <strong>[SPACE]</strong> or click <strong>DIRECTOR REEL</strong> to record automated 60 FPS cinematic sweeps for social video.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Autonomous Director Reel Overlay (Shown when in Director Mode) -->
+  <div class="director-reel-overlay" id="director-overlay" hidden>
+    <div class="director-banner">
+      <div class="rec-dot"></div>
+      <span class="director-title">DIRECTOR MODE // 60 FPS AUTO-REEL</span>
+      <span class="director-time" id="director-time">00:00</span>
+    </div>
+    <div class="director-shot-label" id="director-shot-label">SHOT 01: ESTABLISHING ORBITAL SWEEP</div>
+    <button type="button" class="director-exit-btn" id="btn-exit-director">
+      <span>EXIT DIRECTOR MODE [ESC]</span>
+    </button>
+  </div>
+
+  <!-- Archive & CV Drawer Modal -->
+  <div class="modal-backdrop" id="archive-modal" role="dialog" aria-modal="true" aria-labelledby="archive-modal-title" hidden>
+    <div class="modal-surface archive-surface glass-surface">
+      <div class="modal-header">
+        <div>
+          <span class="section-tag">CREDENTIALS &amp; ARCHIVE</span>
+          <h2 id="archive-modal-title" class="archive-title">Vishwjeet Chavan — Creative Technologist</h2>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-archive" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body archive-body">
+        <section class="archive-section">
+          <h3>ENGINEERING IDENTITY</h3>
+          <p class="archive-lead">
+            Creative Technologist and Spatial Systems Engineer synthesizing computational aesthetics, real-time WebGL graphics, physical simulation shaders, and generative Web Audio architecture.
+          </p>
+          <div class="credentials-badge">
+            <span class="cred-institution">IIIT DHARWAD</span>
+            <span class="cred-degree">B.Tech in Computer Science &amp; Engineering</span>
+            <span class="cred-period">2026 &ndash; 2030</span>
+          </div>
+        </section>
+
+        <section class="archive-section">
+          <h3>CORE SPATIAL COMPETENCIES</h3>
+          <div class="skills-chips">
+            <span class="skill-chip">Three.js / WebGL</span>
+            <span class="skill-chip">GLSL Shader Programming</span>
+            <span class="skill-chip">Procedural PBR Materials</span>
+            <span class="skill-chip">Kinetic Inertia Physics</span>
+            <span class="skill-chip">Web Audio DSP Synthesis</span>
+            <span class="skill-chip">Computational Couture</span>
+            <span class="skill-chip">TypeScript Architecture</span>
+            <span class="skill-chip">Vite / Sub-Second Builds</span>
+          </div>
+        </section>
+
+        <section class="archive-section">
+          <h3>ARCHIVAL EXPERIMENTAL LABS</h3>
+          <div class="archive-projects-grid">
+            <a href="https://portfolio-spatial-eight.vercel.app" target="_blank" rel="noopener noreferrer" class="archive-card">
+              <span class="card-tag">SPATIAL PORTFOLIO 01</span>
+              <h4>Spatial Instrument &amp; 3D Cover Flow</h4>
+              <p>Physical Three.js gyroscope, Apple Cover Flow philatelic exhibition, and 6 generative WebGL labs.</p>
+              <span class="card-link-arrow">&rarr; Live Production</span>
+            </a>
+            <div class="archive-card">
+              <span class="card-tag">EXPERIMENTAL 02</span>
+              <h4>Procedural Fabric &amp; Cloth Engine</h4>
+              <p>Verlet numerical integration with mass-spring matrix constraints and real-time GPU wind turbulence.</p>
+              <span class="card-link-arrow">✦ Integrated in Atelier</span>
+            </div>
+            <div class="archive-card">
+              <span class="card-tag">EXPERIMENTAL 03</span>
+              <h4>Pure Web Audio DSP Synthesizer</h4>
+              <p>Zero MP3/WAV dependencies. Mathematical audio synthesis with low-pass biquad sweep filters.</p>
+              <span class="card-link-arrow">✦ Native Audio Engine</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="archive-section archive-contact">
+          <h3>COLLABORATE &amp; DIRECT COMMISSION</h3>
+          <p>Available for computational design, spatial experiences, high-craft brand ateliers, and creative technology engineering.</p>
+          <div class="contact-actions">
+            <a href="mailto:vishwjeetchavan@gmail.com" class="contact-pill-btn">
+              <span>✉ vishwjeetchavan@gmail.com</span>
+            </a>
+            <a href="https://github.com/vishwjeetlol" target="_blank" rel="noopener noreferrer" class="contact-pill-btn">
+              <span>GitHub / vishwjeetlol</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
