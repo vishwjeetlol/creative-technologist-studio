@@ -4,9 +4,110 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { studioAudio } from './audio';
 
 // ============================================================================
-// GARMENT METADATA CONFIGURATION
+// PROJECT EXHIBITION METADATA (5 FLAGSHIP CREATIVE TECH INSTALLATIONS)
 // ============================================================================
 
+interface ProjectMeta {
+  id: string;
+  name: string;
+  category: string;
+  desc: string;
+  specMaterial: string;
+  specMetricA: string;
+  specMetricB: string;
+  specMetricC: string;
+  defaultMetallic: number;
+  defaultRoughness: number;
+  defaultParam: number;
+  paramLabel: string;
+  cameraPos: [number, number, number];
+  cameraLook: [number, number, number];
+}
+
+const PROJECTS: ProjectMeta[] = [
+  {
+    id: 'couture-atelier',
+    name: 'KINETIC SPATIAL ATELIER',
+    category: 'INSTALLATION-01 // COMPUTATIONAL COUTURE',
+    desc: 'Modular circular apparel rail featuring 5 generative couture garments: Liquid Mercury Trench, Prismatic Glass Corset, Anisotropic Carbon Kimono, Origami Pleats, and Neural Puffer.',
+    specMaterial: 'Liquid Chrome & Optical Crown Glass',
+    specMetricA: '5 Kinetic Wearables',
+    specMetricB: '3.6m Suspension Ring',
+    specMetricC: '96,000 Total Polygons',
+    defaultMetallic: 0.98,
+    defaultRoughness: 0.04,
+    defaultParam: 0.8,
+    paramLabel: 'WIND & DRAPE FLUTTER',
+    cameraPos: [0, 1.45, 8.2],
+    cameraLook: [0, 1.1, 0]
+  },
+  {
+    id: 'kinetic-monolith',
+    name: 'NEUROMORPHIC SOUND MONOLITH',
+    category: 'INSTALLATION-02 // PHYSICAL KINETIC MATRIX',
+    desc: 'Monumental acoustic transducer featuring a 10×10 matrix of 100 articulated obsidian needle pistons with 24k gold diamond tips rippling in real-time to synthesized audio waveforms.',
+    specMaterial: 'High-Density Obsidian & 24k PVD Gold',
+    specMetricA: '100 Articulated Pistons',
+    specMetricB: '140 Hz Resonant Wave',
+    specMetricC: '4.2 Tesla Magnetic Flux',
+    defaultMetallic: 0.92,
+    defaultRoughness: 0.12,
+    defaultParam: 1.0,
+    paramLabel: 'ACOUSTIC WAVE AMPLITUDE',
+    cameraPos: [0, 2.2, 6.2],
+    cameraLook: [0, 0.4, 0]
+  },
+  {
+    id: 'tourbillon-timepiece',
+    name: 'ZERO-G TOURBILLON TIMEPIECE',
+    category: 'INSTALLATION-03 // HAUTE HORLOGERIE ENGINE',
+    desc: 'Exploded mechanical tourbillon floating in zero-gravity inside an octagonal synthetic sapphire case. Features an oscillating balance wheel at 28,800 VPH, planetary gear train, and synthetic ruby jewels.',
+    specMaterial: 'Synthetic Sapphire & 18k Rose Gold',
+    specMetricA: '28,800 VPH Escapement',
+    specMetricB: '60s Tourbillon Cage',
+    specMetricC: '25 Synthetic Ruby Jewels',
+    defaultMetallic: 0.95,
+    defaultRoughness: 0.08,
+    defaultParam: 1.0,
+    paramLabel: 'EXPLODE GAP SEPARATION',
+    cameraPos: [0, 1.2, 4.6],
+    cameraLook: [0, 0.1, 0]
+  },
+  {
+    id: 'computational-flora',
+    name: 'BIOLUMINESCENT ALIEN FLORA',
+    category: 'INSTALLATION-04 // XENOBOTANICAL CRYOPOD',
+    desc: 'Zero-gravity computational terrarium housing an algorithmic alien flora specimen with a Fibonacci spiral stem, phyllotaxis bloom petals, and bioluminescent glowing synaptic spores.',
+    specMaterial: 'Cryo Quartz & Biolum Chlorophyll',
+    specMetricA: '137.5° Golden Angle',
+    specMetricB: '480 Lumen Spore Pulse',
+    specMetricC: 'Flora-X7 Xenobotanical',
+    defaultMetallic: 0.35,
+    defaultRoughness: 0.25,
+    defaultParam: 1.2,
+    paramLabel: 'SPORE PULSE FREQUENCY',
+    cameraPos: [0, 1.3, 5.0],
+    cameraLook: [0, 0.2, 0]
+  },
+  {
+    id: 'ferrofluid-orb',
+    name: 'ELECTROMAGNETIC FERROFLUID ORB',
+    category: 'INSTALLATION-05 // ANTI-GRAVITY MAGNETICS',
+    desc: 'Colloidal magnetic liquid core suspended in zero-gravity between 4 stator copper coils and 3 gimbal flux rings. Magnetic dipole field vectors produce dynamic surface spikes and fluid sheen.',
+    specMaterial: 'Magnetite Colloidal Fe3O4 & Copper',
+    specMetricA: '1.85 Tesla Dipole Field',
+    specMetricB: '4 Magnetic Stator Coils',
+    specMetricC: 'Octahedral Spherical Harmonics',
+    defaultMetallic: 0.98,
+    defaultRoughness: 0.02,
+    defaultParam: 1.0,
+    paramLabel: 'MAGNETIC SPIKE DENSITY',
+    cameraPos: [0, 1.35, 4.8],
+    cameraLook: [0, 0.1, 0]
+  }
+];
+
+// Garment Metadata for Project 0
 interface GarmentData {
   id: string;
   name: string;
@@ -19,7 +120,6 @@ interface GarmentData {
   nodes: string;
   defaultMetallic: number;
   defaultRoughness: number;
-  defaultFlutter: number;
 }
 
 const GARMENTS: GarmentData[] = [
@@ -34,22 +134,20 @@ const GARMENTS: GarmentData[] = [
     tension: '84.2 N/m²',
     nodes: '18,420 Vertices',
     defaultMetallic: 0.98,
-    defaultRoughness: 0.04,
-    defaultFlutter: 0.8
+    defaultRoughness: 0.04
   },
   {
     id: 'prismatic-corset',
     name: 'PRISMATIC GLASS CORSET',
     file: '/models/garment_prismatic_corset.glb',
     tag: 'COUTURE-02 // REFRACTIVE TRANSMISSION',
-    desc: 'Sculptural anatomical bodice constructed from optical crown glass facets. Features internal total reflection, chromatic aberration dispersion, and polished platinum boning.',
-    material: 'Fused Silica Glass (IOR 1.52)',
-    transmission: '0.96 (Optical Clear)',
+    desc: 'Sculptural anatomical bodice constructed from optical crown glass facets. Features internal total reflection, chromatic dispersion, and polished platinum boning.',
+    material: 'Fused Silica Glass (IOR 1.54)',
+    transmission: '0.88 (Optical Clear)',
     tension: '112.5 N/m²',
     nodes: '14,280 Vertices',
-    defaultMetallic: 0.05,
-    defaultRoughness: 0.06,
-    defaultFlutter: 0.2
+    defaultMetallic: 0.10,
+    defaultRoughness: 0.06
   },
   {
     id: 'carbon-exoskeleton',
@@ -62,8 +160,7 @@ const GARMENTS: GarmentData[] = [
     tension: '240.0 N/m²',
     nodes: '16,940 Vertices',
     defaultMetallic: 0.75,
-    defaultRoughness: 0.32,
-    defaultFlutter: 0.3
+    defaultRoughness: 0.30
   },
   {
     id: 'origami-pleats',
@@ -75,9 +172,8 @@ const GARMENTS: GarmentData[] = [
     transmission: '0.12 (Subsurface Sheer)',
     tension: '46.0 N/m²',
     nodes: '19,800 Vertices',
-    defaultMetallic: 0.25,
-    defaultRoughness: 0.38,
-    defaultFlutter: 1.2
+    defaultMetallic: 0.20,
+    defaultRoughness: 0.35
   },
   {
     id: 'neural-puffer',
@@ -89,14 +185,13 @@ const GARMENTS: GarmentData[] = [
     transmission: '0.05 (Translucent Baffle)',
     tension: '68.4 N/m²',
     nodes: '22,600 Vertices',
-    defaultMetallic: 0.65,
-    defaultRoughness: 0.28,
-    defaultFlutter: 0.6
+    defaultMetallic: 0.70,
+    defaultRoughness: 0.25
   }
 ];
 
 // ============================================================================
-// STUDIO STATE
+// STUDIO MAIN APP CLASS
 // ============================================================================
 
 class StudioApp {
@@ -106,25 +201,50 @@ class StudioApp {
   private renderer: THREE.WebGLRenderer;
   private loader: GLTFLoader;
 
-  // Rail & Garments
-  private carouselGroup: THREE.Group;
+  // Active Project State
+  private activeProjectIndex = 0;
+  private projectGroups: THREE.Group[] = [];
+
+  // Project 0: Couture Atelier
+  private coutureGroup = new THREE.Group();
+  private carouselGroup = new THREE.Group();
+  private railRadius = 3.6;
+  private carouselAngle = 0;
+  private targetCarouselAngle = 0;
+  private activeGarmentIndex = 0;
+  private isDragging = false;
+  private lastPointerX = 0;
   private garmentNodes: Array<{
     group: THREE.Group;
     meshGroup: THREE.Group;
     data: GarmentData;
     materials: THREE.Material[];
-    originalPositions?: Float32Array;
   }> = [];
 
-  // Carousel Physics
-  private railRadius = 3.6;
-  private carouselAngle = 0;
-  private targetCarouselAngle = 0;
-  private activeIndex = 0;
-  private isDragging = false;
-  private lastPointerX = 0;
+  // Project 1: Kinetic Monolith
+  private monolithGroup = new THREE.Group();
+  private monolithPistons: Array<{ mesh: THREE.Object3D; baseZ: number; dist: number }> = [];
+  private laserRing: THREE.Object3D | null = null;
 
-  // Lighting & Environment
+  // Project 2: Tourbillon Timepiece
+  private tourbillonGroup = new THREE.Group();
+  private balanceWheel: THREE.Object3D | null = null;
+  private centerWheel: THREE.Object3D | null = null;
+  private thirdWheel: THREE.Object3D | null = null;
+  private explodedParts: Array<{ obj: THREE.Object3D; baseZ: number; offsetZ: number }> = [];
+
+  // Project 3: Computational Flora
+  private floraGroup = new THREE.Group();
+  private floraStem: THREE.Object3D | null = null;
+  private floraPetals: Array<{ obj: THREE.Object3D; baseAngle: number; idx: number }> = [];
+  private sporeNodes: Array<{ obj: THREE.Object3D; mat?: THREE.MeshStandardMaterial }> = [];
+
+  // Project 4: Ferrofluid Orb
+  private ferrofluidGroup = new THREE.Group();
+  private ferrofluidOrb: THREE.Object3D | null = null;
+  private fieldRings: THREE.Object3D[] = [];
+
+  // Studio Lighting & Environment
   private ambientLight!: THREE.AmbientLight;
   private keyLight!: THREE.DirectionalLight;
   private rimLight!: THREE.DirectionalLight;
@@ -136,15 +256,13 @@ class StudioApp {
   private isDirectorMode = false;
   private directorTime = 0;
 
-  // Shader Animation Clock
+  // Simulation Clock & Sliders
   private clock = new THREE.Clock();
-
-  // Inspect Options
   private isWireframe = false;
   private isExploded = false;
   private userMetallic = 0.95;
   private userRoughness = 0.08;
-  private userFlutter = 0.8;
+  private userParam = 1.0;
 
   constructor() {
     this.container = document.getElementById('webgl-container')!;
@@ -166,16 +284,25 @@ class StudioApp {
     this.container.appendChild(this.renderer.domElement);
 
     this.loader = new GLTFLoader();
-    this.carouselGroup = new THREE.Group();
-    this.scene.add(this.carouselGroup);
+
+    // Initialize 5 Project Root Groups
+    this.projectGroups = [
+      this.coutureGroup,
+      this.monolithGroup,
+      this.tourbillonGroup,
+      this.floraGroup,
+      this.ferrofluidGroup
+    ];
+    this.projectGroups.forEach(g => this.scene.add(g));
 
     this.setupEnvironment();
     this.setupGround();
-    this.loadAssets();
+    this.loadAllProjects();
     this.setupInteractions();
     this.setupUI();
 
     window.addEventListener('resize', this.onResize.bind(this));
+    this.selectProject(0);
     this.animate();
   }
 
@@ -184,7 +311,6 @@ class StudioApp {
   // ==========================================================================
 
   private setupEnvironment() {
-    // Generate Studio HDR Environment Map for Realistic Physical PBR Reflections
     const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
     pmremGenerator.compileEquirectangularShader();
     const roomEnv = new RoomEnvironment();
@@ -193,21 +319,17 @@ class StudioApp {
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     this.scene.add(this.ambientLight);
 
-    // Key Spotlight / Directional Light
     this.keyLight = new THREE.DirectionalLight(0xffffff, 3.2);
     this.keyLight.position.set(3, 6, 5);
     this.keyLight.castShadow = true;
     this.keyLight.shadow.mapSize.width = 2048;
     this.keyLight.shadow.mapSize.height = 2048;
-    this.keyLight.shadow.bias = -0.0001;
     this.scene.add(this.keyLight);
 
-    // Rim Backlight for high-fashion silhouette separation
     this.rimLight = new THREE.DirectionalLight(0xc8a265, 3.2);
     this.rimLight.position.set(-4, 4, -4);
     this.scene.add(this.rimLight);
 
-    // Colored Fill Point Light
     this.fillLight = new THREE.PointLight(0x38bdf8, 1.5, 12);
     this.fillLight.position.set(0, 2.5, 0);
     this.scene.add(this.fillLight);
@@ -220,8 +342,7 @@ class StudioApp {
     if (preset === 'noir') {
       this.scene.background = new THREE.Color(0x07080a);
       this.scene.fog = new THREE.FogExp2(0x07080a, 0.045);
-      this.ambientLight.color.setHex(0xffffff);
-      this.ambientLight.intensity = 0.35;
+      this.ambientLight.intensity = 0.55;
       this.keyLight.color.setHex(0xffffff);
       this.keyLight.intensity = 3.2;
       this.rimLight.color.setHex(0xc8a265);
@@ -232,28 +353,27 @@ class StudioApp {
     } else if (preset === 'prismatic') {
       this.scene.background = new THREE.Color(0x06070c);
       this.scene.fog = new THREE.FogExp2(0x06070c, 0.04);
-      this.ambientLight.intensity = 0.45;
-      this.keyLight.color.setHex(0x38bdf8); // Cyan key
+      this.ambientLight.intensity = 0.65;
+      this.keyLight.color.setHex(0x38bdf8);
       this.keyLight.intensity = 3.8;
-      this.rimLight.color.setHex(0xf43f5e); // Magenta rim
+      this.rimLight.color.setHex(0xf43f5e);
       this.rimLight.intensity = 4.2;
-      this.fillLight.color.setHex(0xa855f7); // Purple ambient
+      this.fillLight.color.setHex(0xa855f7);
       this.fillLight.intensity = 2.0;
       this.renderer.toneMappingExposure = 1.25;
     } else if (preset === 'golden') {
       this.scene.background = new THREE.Color(0x090807);
       this.scene.fog = new THREE.FogExp2(0x090807, 0.045);
-      this.ambientLight.intensity = 0.5;
-      this.keyLight.color.setHex(0xfef3c7); // Warm 3200K tungsten
+      this.ambientLight.intensity = 0.65;
+      this.keyLight.color.setHex(0xfef3c7);
       this.keyLight.intensity = 3.5;
-      this.rimLight.color.setHex(0xd97706); // Amber rim
+      this.rimLight.color.setHex(0xd97706);
       this.rimLight.intensity = 3.8;
       this.fillLight.color.setHex(0xb45309);
       this.fillLight.intensity = 1.2;
       this.renderer.toneMappingExposure = 1.2;
     }
 
-    // Update UI active state
     document.querySelectorAll('.light-preset-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-preset') === preset);
     });
@@ -272,7 +392,6 @@ class StudioApp {
     this.groundMirror.receiveShadow = true;
     this.scene.add(this.groundMirror);
 
-    // Decorative floor target concentric rings
     const ringGeo = new THREE.RingGeometry(3.5, 3.52, 64);
     const ringMat = new THREE.MeshBasicMaterial({ color: 0xc8a265, side: THREE.DoubleSide, transparent: true, opacity: 0.25 });
     const floorRing = new THREE.Mesh(ringGeo, ringMat);
@@ -282,26 +401,20 @@ class StudioApp {
   }
 
   // ==========================================================================
-  // 3D MODEL LOADING & CIRCULAR PLACEMENT
+  // 3D MODEL LOADING FOR ALL 5 FLAGSHIP INSTALLATIONS
   // ==========================================================================
 
-  private loadAssets() {
-    // 1. Load Static Circular Guide Rail
+  private loadAllProjects() {
+    // ------------------------------------------------------------------------
+    // Project 0: Kinetic Couture Atelier
+    // ------------------------------------------------------------------------
+    this.coutureGroup.add(this.carouselGroup);
     this.loader.load('/models/circular_rail_static.glb', (gltf) => {
-      const rail = gltf.scene;
-      rail.traverse((child) => {
-        if ((child as THREE.Mesh).isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
-      this.scene.add(rail);
+      this.coutureGroup.add(gltf.scene);
     });
 
-    // 2. Load Modular Hanger Unit and mount 5 garments along the rotating rail
     this.loader.load('/models/hanger_unit.glb', (hangerGltf) => {
       const angleStep = (Math.PI * 2) / GARMENTS.length;
-
       GARMENTS.forEach((data, index) => {
         const angle = index * angleStep;
         const x = Math.sin(angle) * this.railRadius;
@@ -309,15 +422,9 @@ class StudioApp {
 
         const garmentGroup = new THREE.Group();
         garmentGroup.position.set(x, 2.4, z);
-        garmentGroup.rotation.y = angle + Math.PI; // Face outward toward camera and viewer
+        garmentGroup.rotation.y = angle + Math.PI;
 
-        // Add cloned hanger trolley unit
         const hangerClone = hangerGltf.scene.clone();
-        hangerClone.traverse((child) => {
-          if ((child as THREE.Mesh).isMesh) {
-            child.castShadow = true;
-          }
-        });
         garmentGroup.add(hangerClone);
 
         const meshGroup = new THREE.Group();
@@ -325,7 +432,6 @@ class StudioApp {
         this.carouselGroup.add(garmentGroup);
 
         const materials: THREE.Material[] = [];
-
         this.loader.load(data.file, (gltf) => {
           const model = gltf.scene;
           model.traverse((child) => {
@@ -333,15 +439,8 @@ class StudioApp {
               const mesh = child as THREE.Mesh;
               mesh.castShadow = true;
               mesh.receiveShadow = true;
+              if (mesh.material) materials.push(Array.isArray(mesh.material) ? mesh.material[0] : mesh.material);
 
-              // Preserve materials
-              if (Array.isArray(mesh.material)) {
-                materials.push(...mesh.material);
-              } else if (mesh.material) {
-                materials.push(mesh.material);
-              }
-
-              // Custom procedural tweaks per garment
               if (data.id === 'mercury-trench' && mesh.material instanceof THREE.MeshStandardMaterial) {
                 mesh.material.metalness = 1.0;
                 mesh.material.roughness = 0.02;
@@ -359,32 +458,202 @@ class StudioApp {
                 });
                 mesh.material = glassMat;
                 materials.push(glassMat);
-              } else if (data.id === 'neural-puffer' && mesh.name.includes('Pipe')) {
-                mesh.material = new THREE.MeshStandardMaterial({
-                  color: 0x38bdf8,
-                  emissive: 0x38bdf8,
-                  emissiveIntensity: 4.5,
-                  toneMapped: false
-                });
               }
             }
           });
-
           meshGroup.add(model);
         });
 
-        this.garmentNodes.push({
-          group: garmentGroup,
-          meshGroup,
-          data,
-          materials
-        });
+        this.garmentNodes.push({ group: garmentGroup, meshGroup, data, materials });
       });
+    });
+
+    // ------------------------------------------------------------------------
+    // Project 1: Kinetic Sound Monolith
+    // ------------------------------------------------------------------------
+    this.loader.load('/models/project_kinetic_monolith.glb', (gltf) => {
+      const monolith = gltf.scene;
+      monolith.position.set(0, 0.4, 0);
+      monolith.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.name.startsWith('Piston')) {
+            const pos = child.position;
+            const dist = Math.sqrt(pos.x ** 2 + pos.y ** 2);
+            this.monolithPistons.push({ mesh: child, baseZ: pos.z, dist });
+          } else if (child.name.includes('Laser')) {
+            this.laserRing = child;
+          }
+        }
+      });
+      this.monolithGroup.add(monolith);
+    });
+
+    // ------------------------------------------------------------------------
+    // Project 2: Zero-G Tourbillon Timepiece
+    // ------------------------------------------------------------------------
+    this.loader.load('/models/project_tourbillon_timepiece.glb', (gltf) => {
+      const watch = gltf.scene;
+      watch.position.set(0, 0.6, 0);
+      watch.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.name.includes('Tourbillon_Balance')) {
+            this.balanceWheel = child;
+          } else if (child.name.includes('Center_Wheel')) {
+            this.centerWheel = child;
+            this.explodedParts.push({ obj: child, baseZ: child.position.z, offsetZ: 0.5 });
+          } else if (child.name.includes('Third_Wheel')) {
+            this.thirdWheel = child;
+            this.explodedParts.push({ obj: child, baseZ: child.position.z, offsetZ: 0.9 });
+          } else if (child.name.includes('Sapphire_Case')) {
+            const sapphireMat = new THREE.MeshPhysicalMaterial({
+              color: new THREE.Color(0xffffff),
+              transmission: 0.94,
+              transparent: true,
+              opacity: 0.6,
+              roughness: 0.05,
+              ior: 1.77,
+              thickness: 1.5,
+              depthWrite: false
+            });
+            (child as THREE.Mesh).material = sapphireMat;
+          }
+        }
+      });
+      this.tourbillonGroup.add(watch);
+    });
+
+    // ------------------------------------------------------------------------
+    // Project 3: Computational Bioluminescent Flora
+    // ------------------------------------------------------------------------
+    this.loader.load('/models/project_computational_flora.glb', (gltf) => {
+      const flora = gltf.scene;
+      flora.position.set(0, 0.5, 0);
+      flora.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as THREE.Mesh;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          if (mesh.name.includes('Stem')) {
+            this.floraStem = mesh;
+          } else if (mesh.name.includes('Petal')) {
+            this.floraPetals.push({ obj: mesh, baseAngle: mesh.rotation.z, idx: this.floraPetals.length });
+          } else if (mesh.name.includes('Spore')) {
+            const mat = mesh.material instanceof THREE.MeshStandardMaterial ? mesh.material : undefined;
+            this.sporeNodes.push({ obj: mesh, mat });
+          } else if (mesh.name.includes('Containment_Vessel')) {
+            mesh.material = new THREE.MeshPhysicalMaterial({
+              color: new THREE.Color(0xe0f2fe),
+              transmission: 0.95,
+              transparent: true,
+              opacity: 0.45,
+              roughness: 0.04,
+              ior: 1.52,
+              thickness: 0.8,
+              depthWrite: false
+            });
+          }
+        }
+      });
+      this.floraGroup.add(flora);
+    });
+
+    // ------------------------------------------------------------------------
+    // Project 4: Electromagnetic Ferrofluid Orb
+    // ------------------------------------------------------------------------
+    this.loader.load('/models/project_ferrofluid_orb.glb', (gltf) => {
+      const ferro = gltf.scene;
+      ferro.position.set(0, 0.45, 0);
+      ferro.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as THREE.Mesh;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+          if (mesh.name.includes('Ferrofluid_Orb')) {
+            this.ferrofluidOrb = mesh;
+            mesh.material = new THREE.MeshStandardMaterial({
+              color: 0x07080b,
+              metalness: 0.98,
+              roughness: 0.04
+            });
+          } else if (mesh.name.includes('Field_Ring')) {
+            this.fieldRings.push(mesh);
+          }
+        }
+      });
+      this.ferrofluidGroup.add(ferro);
     });
   }
 
   // ==========================================================================
-  // INTERACTION & INERTIA PHYSICS
+  // PROJECT SWITCHER
+  // ==========================================================================
+
+  public selectProject(index: number) {
+    this.activeProjectIndex = (index + PROJECTS.length) % PROJECTS.length;
+    const cur = PROJECTS[this.activeProjectIndex];
+
+    // Toggle 3D Group Visibility
+    this.projectGroups.forEach((g, idx) => {
+      g.visible = idx === this.activeProjectIndex;
+    });
+
+    // Toggle Garment Carousel HUD (Only for Project 0)
+    const carouselHud = document.querySelector('.carousel-hud') as HTMLElement;
+    if (carouselHud) {
+      carouselHud.style.display = this.activeProjectIndex === 0 ? 'flex' : 'none';
+    }
+
+    // Smoothly reposition camera for this installation
+    this.camera.position.set(...cur.cameraPos);
+    this.camera.lookAt(...cur.cameraLook);
+
+    // Update Project Switcher Nav Buttons
+    document.querySelectorAll('.project-switch-btn').forEach(btn => {
+      const pIdx = parseInt(btn.getAttribute('data-project') || '0', 10);
+      btn.classList.toggle('active', pIdx === this.activeProjectIndex);
+    });
+
+    // Update Telemetry Panel UI
+    this.updateProjectTelemetry();
+
+    // Audio Feedback
+    studioAudio.playClick(2400);
+    studioAudio.playWhoosh(1);
+  }
+
+  private updateProjectTelemetry() {
+    const cur = PROJECTS[this.activeProjectIndex];
+    const tagElem = document.querySelector('.panel-tag');
+    const titleElem = document.getElementById('garment-title');
+    const descElem = document.getElementById('garment-desc');
+    const matElem = document.getElementById('spec-material');
+    const transElem = document.getElementById('spec-transmission');
+    const tensionElem = document.getElementById('spec-tension');
+    const nodesElem = document.getElementById('spec-nodes');
+    const paramLabelElem = document.querySelector('label[for="slider-flutter"]');
+    const paramSlider = document.getElementById('slider-flutter') as HTMLInputElement;
+
+    if (tagElem) tagElem.textContent = cur.category;
+    if (titleElem) titleElem.textContent = cur.name;
+    if (descElem) descElem.textContent = cur.desc;
+    if (matElem) matElem.textContent = cur.specMaterial;
+    if (transElem) transElem.textContent = cur.specMetricA;
+    if (tensionElem) tensionElem.textContent = cur.specMetricB;
+    if (nodesElem) nodesElem.textContent = cur.specMetricC;
+    if (paramLabelElem) paramLabelElem.textContent = cur.paramLabel;
+
+    if (paramSlider) {
+      paramSlider.value = cur.defaultParam.toString();
+      this.userParam = cur.defaultParam;
+    }
+  }
+
+  // ==========================================================================
+  // INTERACTIONS (DRAG, SCROLL, HOTKEYS)
   // ==========================================================================
 
   private setupInteractions() {
@@ -402,13 +671,16 @@ class StudioApp {
       if (!this.isDragging) return;
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
       const delta = (clientX - this.lastPointerX) * 0.005;
-      this.carouselAngle += delta;
-      this.targetCarouselAngle = this.carouselAngle;
-      this.lastPointerX = clientX;
 
-      if (Math.abs(delta) > 0.008) {
-        studioAudio.playRailTick(Math.abs(delta) * 100);
+      if (this.activeProjectIndex === 0) {
+        this.carouselAngle += delta;
+        this.targetCarouselAngle = this.carouselAngle;
+        if (Math.abs(delta) > 0.008) studioAudio.playRailTick(Math.abs(delta) * 100);
+      } else {
+        // Rotate current project model
+        this.projectGroups[this.activeProjectIndex].rotation.y += delta * 1.5;
       }
+      this.lastPointerX = clientX;
     };
 
     const onPointerUp = (e: MouseEvent | TouchEvent) => {
@@ -416,10 +688,9 @@ class StudioApp {
       this.isDragging = false;
       const clientX = 'changedTouches' in e ? e.changedTouches[0].clientX : (e as MouseEvent).clientX;
       if (Math.abs(clientX - startX) < 5) {
-        // Simple click without drag - check raycast
-        this.handleRaycast(clientX, 'changedTouches' in e ? e.changedTouches[0].clientY : (e as MouseEvent).clientY);
-      } else {
-        this.snapToNearest();
+        // Raycast click
+      } else if (this.activeProjectIndex === 0) {
+        this.snapToNearestGarment();
       }
     };
 
@@ -432,20 +703,20 @@ class StudioApp {
     window.addEventListener('touchmove', onPointerMove, { passive: true });
     window.addEventListener('touchend', onPointerUp, { passive: true });
 
-    // Mouse Wheel
     window.addEventListener('wheel', (e) => {
       if (this.isDirectorMode) return;
-      this.targetCarouselAngle += e.deltaY * 0.0015;
-      studioAudio.playRailTick(Math.abs(e.deltaY) * 0.02);
-      this.snapToNearest();
+      if (this.activeProjectIndex === 0) {
+        this.targetCarouselAngle += e.deltaY * 0.0015;
+        this.snapToNearestGarment();
+      } else {
+        this.projectGroups[this.activeProjectIndex].rotation.y += e.deltaY * 0.002;
+      }
     }, { passive: true });
 
-    // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        this.stepGarment(-1);
-      } else if (e.key === 'ArrowRight') {
-        this.stepGarment(1);
+      if (e.key >= '1' && e.key <= '5') {
+        const pIdx = parseInt(e.key, 10) - 1;
+        this.selectProject(pIdx);
       } else if (e.key === ' ' || e.key === 'r' || e.key === 'R') {
         this.toggleDirectorMode();
       } else if (e.key === 'Escape') {
@@ -460,30 +731,8 @@ class StudioApp {
     });
   }
 
-  private handleRaycast(x: number, y: number) {
-    const mouse = new THREE.Vector2(
-      (x / window.innerWidth) * 2 - 1,
-      -(y / window.innerHeight) * 2 + 1
-    );
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, this.camera);
-
-    const intersects = raycaster.intersectObjects(this.carouselGroup.children, true);
-    if (intersects.length > 0) {
-      let hit = intersects[0].object;
-      while (hit.parent && hit.parent !== this.carouselGroup) {
-        hit = hit.parent;
-      }
-      const hitIdx = this.garmentNodes.findIndex(node => node.group === hit);
-      if (hitIdx !== -1) {
-        this.selectGarment(hitIdx);
-      }
-    }
-  }
-
-  private snapToNearest() {
+  private snapToNearestGarment() {
     const angleStep = (Math.PI * 2) / GARMENTS.length;
-    // Normalized angle relative to origin
     let normalized = -this.targetCarouselAngle % (Math.PI * 2);
     if (normalized < 0) normalized += Math.PI * 2;
     const nearestIndex = Math.round(normalized / angleStep) % GARMENTS.length;
@@ -491,27 +740,21 @@ class StudioApp {
   }
 
   public selectGarment(index: number) {
-    const oldIndex = this.activeIndex;
-    this.activeIndex = (index + GARMENTS.length) % GARMENTS.length;
+    this.activeGarmentIndex = (index + GARMENTS.length) % GARMENTS.length;
     const angleStep = (Math.PI * 2) / GARMENTS.length;
-
-    // Calculate shortest angular path to bring activeIndex to angle 0 (front of camera)
-    const targetAngle = -this.activeIndex * angleStep;
+    const targetAngle = -this.activeGarmentIndex * angleStep;
     const diff = (targetAngle - this.carouselAngle) % (Math.PI * 2);
     let shortestDiff = diff;
     if (diff > Math.PI) shortestDiff -= Math.PI * 2;
     if (diff < -Math.PI) shortestDiff += Math.PI * 2;
 
     this.targetCarouselAngle = this.carouselAngle + shortestDiff;
+    studioAudio.playWhoosh(shortestDiff > 0 ? 1 : -1);
 
-    if (oldIndex !== this.activeIndex) {
-      studioAudio.playWhoosh(shortestDiff > 0 ? 1 : -1);
-      this.updateTelemetryUI();
-    }
-  }
-
-  public stepGarment(delta: number) {
-    this.selectGarment(this.activeIndex + delta);
+    document.querySelectorAll('.garment-tab-item').forEach(tab => {
+      const idx = parseInt(tab.getAttribute('data-index') || '0', 10);
+      tab.classList.toggle('active', idx === this.activeGarmentIndex);
+    });
   }
 
   // ==========================================================================
@@ -529,42 +772,44 @@ class StudioApp {
         this.directorTime = 0;
       } else {
         overlay.setAttribute('hidden', 'true');
-        // Reset camera position smoothly
-        this.camera.position.set(0, 1.35, 7.8);
-        this.camera.lookAt(0, 0.45, 0);
+        const cur = PROJECTS[this.activeProjectIndex];
+        this.camera.position.set(...cur.cameraPos);
+        this.camera.lookAt(...cur.cameraLook);
       }
     }
   }
 
   // ==========================================================================
-  // UI SYNC & TELEMETRY
+  // UI SYNC
   // ==========================================================================
 
   private setupUI() {
-    // Navigation arrows
-    document.getElementById('btn-prev-garment')?.addEventListener('click', () => {
-      this.stepGarment(-1);
-    });
-    document.getElementById('btn-next-garment')?.addEventListener('click', () => {
-      this.stepGarment(1);
+    // Project Switcher Buttons
+    document.querySelectorAll('.project-switch-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const pIdx = parseInt((e.currentTarget as HTMLElement).getAttribute('data-project') || '0', 10);
+        this.selectProject(pIdx);
+      });
     });
 
-    // Quick Tabs
+    // Garment tabs
     document.querySelectorAll('.garment-tab-item').forEach(tab => {
       tab.addEventListener('click', (e) => {
         const idx = parseInt((e.currentTarget as HTMLElement).getAttribute('data-index') || '0', 10);
         this.selectGarment(idx);
-        studioAudio.playClick();
       });
     });
 
-    // Director Mode Triggers
-    document.getElementById('btn-director-mode')?.addEventListener('click', () => {
-      this.toggleDirectorMode();
+    document.getElementById('btn-prev-garment')?.addEventListener('click', () => {
+      this.selectGarment(this.activeGarmentIndex - 1);
     });
-    document.getElementById('btn-exit-director')?.addEventListener('click', () => {
-      this.toggleDirectorMode(false);
+    document.getElementById('btn-next-garment')?.addEventListener('click', () => {
+      this.selectGarment(this.activeGarmentIndex + 1);
     });
+
+    // Director Mode Trigger
+    document.getElementById('btn-director-mode')?.addEventListener('click', () => this.toggleDirectorMode());
+    document.getElementById('btn-exit-director')?.addEventListener('click', () => this.toggleDirectorMode(false));
 
     // Audio Synth Button
     const audioBtn = document.getElementById('btn-audio-toggle');
@@ -584,32 +829,41 @@ class StudioApp {
       });
     });
 
-    // Material Tuner Sliders
+    // Sliders
     const metallicSlider = document.getElementById('slider-metallic') as HTMLInputElement;
     const roughnessSlider = document.getElementById('slider-roughness') as HTMLInputElement;
-    const flutterSlider = document.getElementById('slider-flutter') as HTMLInputElement;
+    const paramSlider = document.getElementById('slider-flutter') as HTMLInputElement;
 
     metallicSlider?.addEventListener('input', (e) => {
       this.userMetallic = parseFloat((e.target as HTMLInputElement).value);
-      this.updateActiveMaterialProps();
+      this.projectGroups[this.activeProjectIndex].traverse((child) => {
+        if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material instanceof THREE.MeshStandardMaterial) {
+          ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).metalness = this.userMetallic;
+        }
+      });
     });
     roughnessSlider?.addEventListener('input', (e) => {
       this.userRoughness = parseFloat((e.target as HTMLInputElement).value);
-      this.updateActiveMaterialProps();
+      this.projectGroups[this.activeProjectIndex].traverse((child) => {
+        if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material instanceof THREE.MeshStandardMaterial) {
+          ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).roughness = this.userRoughness;
+        }
+      });
     });
-    flutterSlider?.addEventListener('input', (e) => {
-      this.userFlutter = parseFloat((e.target as HTMLInputElement).value);
+    paramSlider?.addEventListener('input', (e) => {
+      this.userParam = parseFloat((e.target as HTMLInputElement).value);
     });
 
-    // Wireframe & Explode buttons
+    // Wireframe & Explode
     const wireframeBtn = document.getElementById('btn-toggle-wireframe');
     wireframeBtn?.addEventListener('click', () => {
       this.isWireframe = !this.isWireframe;
       wireframeBtn.classList.toggle('active', this.isWireframe);
-      this.garmentNodes.forEach(node => {
-        node.materials.forEach(mat => {
+      this.scene.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material) {
+          const mat = (child as THREE.Mesh).material;
           if ('wireframe' in mat) (mat as THREE.MeshStandardMaterial).wireframe = this.isWireframe;
-        });
+        }
       });
       studioAudio.playClick(1500);
     });
@@ -621,76 +875,22 @@ class StudioApp {
       studioAudio.playClick(1200);
     });
 
-    // Archive & CV Modal
+    // Archive Modal
     const archiveModal = document.getElementById('archive-modal');
-    const openArchiveBtn = document.getElementById('btn-open-archive');
-    const closeArchiveBtn = document.getElementById('btn-close-archive');
-
-    openArchiveBtn?.addEventListener('click', () => {
+    document.getElementById('btn-open-archive')?.addEventListener('click', () => {
       archiveModal?.removeAttribute('hidden');
       studioAudio.playClick();
     });
-    closeArchiveBtn?.addEventListener('click', () => {
+    document.getElementById('btn-close-archive')?.addEventListener('click', () => {
       archiveModal?.setAttribute('hidden', 'true');
     });
     archiveModal?.addEventListener('click', (e) => {
       if (e.target === archiveModal) archiveModal.setAttribute('hidden', 'true');
     });
-
-    this.updateTelemetryUI();
-  }
-
-  private updateActiveMaterialProps() {
-    const activeNode = this.garmentNodes[this.activeIndex];
-    if (!activeNode) return;
-    activeNode.materials.forEach(mat => {
-      if (mat instanceof THREE.MeshStandardMaterial || mat instanceof THREE.MeshPhysicalMaterial) {
-        mat.metalness = this.userMetallic;
-        mat.roughness = this.userRoughness;
-      }
-    });
-  }
-
-  private updateTelemetryUI() {
-    const cur = GARMENTS[this.activeIndex];
-    const indexDisp = document.getElementById('garment-index-display');
-    const titleDisp = document.getElementById('garment-title');
-    const descDisp = document.getElementById('garment-desc');
-    const matDisp = document.getElementById('spec-material');
-    const transDisp = document.getElementById('spec-transmission');
-    const tensionDisp = document.getElementById('spec-tension');
-    const nodesDisp = document.getElementById('spec-nodes');
-
-    if (indexDisp) indexDisp.textContent = `${this.activeIndex + 1}`;
-    if (titleDisp) titleDisp.textContent = cur.name;
-    if (descDisp) descDisp.textContent = cur.desc;
-    if (matDisp) matDisp.textContent = cur.material;
-    if (transDisp) transDisp.textContent = cur.transmission;
-    if (tensionDisp) tensionDisp.textContent = cur.tension;
-    if (nodesDisp) nodesDisp.textContent = cur.nodes;
-
-    // Update Tab UI
-    document.querySelectorAll('.garment-tab-item').forEach(tab => {
-      const idx = parseInt(tab.getAttribute('data-index') || '0', 10);
-      tab.classList.toggle('active', idx === this.activeIndex);
-      tab.setAttribute('aria-selected', idx === this.activeIndex ? 'true' : 'false');
-    });
-
-    // Sliders
-    const metallicSlider = document.getElementById('slider-metallic') as HTMLInputElement;
-    const roughnessSlider = document.getElementById('slider-roughness') as HTMLInputElement;
-    const flutterSlider = document.getElementById('slider-flutter') as HTMLInputElement;
-
-    if (metallicSlider) metallicSlider.value = cur.defaultMetallic.toString();
-    if (roughnessSlider) roughnessSlider.value = cur.defaultRoughness.toString();
-    if (flutterSlider) flutterSlider.value = cur.defaultFlutter.toString();
-    this.userMetallic = cur.defaultMetallic;
-    this.userRoughness = cur.defaultRoughness;
-    this.userFlutter = cur.defaultFlutter;
   }
 
   // ==========================================================================
-  // RENDER LOOP & PROCEDURAL FABRIC PHYSICS
+  // RENDER LOOP & REAL-TIME MULTI-PHYSICS
   // ==========================================================================
 
   private animate() {
@@ -699,99 +899,128 @@ class StudioApp {
     const delta = this.clock.getDelta();
     const elapsedTime = this.clock.getElapsedTime();
 
-    // 1. Spring-damped carousel rotation
-    if (!this.isDragging) {
-      this.carouselAngle += (this.targetCarouselAngle - this.carouselAngle) * 0.08;
+    // 1. Project 0: Kinetic Couture Carousel
+    if (this.coutureGroup.visible) {
+      if (!this.isDragging) {
+        this.carouselAngle += (this.targetCarouselAngle - this.carouselAngle) * 0.08;
+      }
+      this.carouselGroup.rotation.y = this.carouselAngle;
+
+      this.garmentNodes.forEach((node, idx) => {
+        const bob = Math.sin(elapsedTime * 1.5 + idx * 1.2) * 0.035 * this.userParam;
+        node.meshGroup.position.y = bob;
+        if (node.data.id === 'neural-puffer') {
+          const pulse = (Math.sin(elapsedTime * 3.0) + 1.0) * 0.5;
+          node.materials.forEach(mat => {
+            if (mat instanceof THREE.MeshStandardMaterial && mat.name.includes('Neon')) {
+              mat.emissiveIntensity = 2.0 + pulse * 3.5;
+            }
+          });
+        }
+      });
     }
-    this.carouselGroup.rotation.y = this.carouselAngle;
 
-    // Update UI angle
-    const angleDeg = ((this.carouselAngle * 180 / Math.PI) % 360).toFixed(1);
-    const railAngleElem = document.getElementById('env-rail-angle');
-    if (railAngleElem) railAngleElem.textContent = `${angleDeg}°`;
-
-    // 2. Garment Pendulum Sway & Dynamic Flutter
-    this.garmentNodes.forEach((node, idx) => {
-      const isFocused = idx === this.activeIndex;
-      
-      // Floating bobbing motion
-      const bob = Math.sin(elapsedTime * 1.5 + idx * 1.2) * 0.035 * this.userFlutter;
-      node.meshGroup.position.y = bob;
-
-      // When focused, tilt slightly toward viewer
-      const targetTilt = isFocused ? 0.08 : 0.0;
-      node.meshGroup.rotation.x += (targetTilt - node.meshGroup.rotation.x) * 0.1;
-
-      // Displace Shell explode effect
-      const targetScale = this.isExploded ? 1.25 : 1.0;
-      node.meshGroup.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
-
-      // Liquid Mercury wave ripple
-      if (node.data.id === 'mercury-trench') {
-        node.meshGroup.rotation.y = Math.sin(elapsedTime * 0.8) * 0.06;
+    // 2. Project 1: Kinetic Sound Monolith (100 Articulated Needles Wave)
+    if (this.monolithGroup.visible) {
+      this.monolithPistons.forEach(p => {
+        const wave = Math.sin(p.dist * 3.8 - elapsedTime * 3.5) * 0.32 * this.userParam;
+        p.mesh.position.z = p.baseZ + wave;
+      });
+      if (this.laserRing) {
+        this.laserRing.rotation.z = elapsedTime * 0.5;
       }
+    }
 
-      // Neural Puffer bioluminescent pulse
-      if (node.data.id === 'neural-puffer') {
-        const pulse = (Math.sin(elapsedTime * 3.0) + 1.0) * 0.5;
-        node.materials.forEach(mat => {
-          if (mat instanceof THREE.MeshStandardMaterial && mat.name.includes('Neon')) {
-            mat.emissiveIntensity = 2.0 + pulse * 3.5;
-          }
-        });
+    // 3. Project 2: Zero-G Tourbillon Timepiece (High-Frequency Mechanical Escapement)
+    if (this.tourbillonGroup.visible) {
+      if (this.balanceWheel) {
+        // 4 Hz escapement oscillation (28,800 VPH)
+        this.balanceWheel.rotation.z = Math.sin(elapsedTime * 16.0 * this.userParam) * 0.55;
       }
-    });
+      if (this.centerWheel) {
+        this.centerWheel.rotation.z = elapsedTime * 0.25 * this.userParam;
+      }
+      if (this.thirdWheel) {
+        this.thirdWheel.rotation.z = -elapsedTime * 0.65 * this.userParam;
+      }
+      // Zero-G Explode separation along Z
+      const explodeFactor = this.isExploded ? 1.6 : 0.0;
+      this.explodedParts.forEach(part => {
+        part.obj.position.z = part.baseZ + part.offsetZ * explodeFactor;
+      });
+    }
 
-    // 3. Autonomous Director Reel Mode Logic
+    // 4. Project 3: Computational Bioluminescent Flora (Zero-G Organic Respiration)
+    if (this.floraGroup.visible) {
+      if (this.floraStem) {
+        this.floraStem.rotation.z = Math.sin(elapsedTime * 0.8) * 0.06 * this.userParam;
+      }
+      this.floraPetals.forEach(p => {
+        p.obj.rotation.x = 0.2 + Math.sin(elapsedTime * 1.6 + p.idx * 0.3) * 0.08 * this.userParam;
+      });
+      // Pulsing Synaptic Bioluminescent Spores
+      const sporePulse = (Math.sin(elapsedTime * 2.8 * this.userParam) + 1.0) * 0.5;
+      this.sporeNodes.forEach(s => {
+        if (s.mat) s.mat.emissiveIntensity = 3.0 + sporePulse * 4.0;
+      });
+    }
+
+    // 5. Project 4: Electromagnetic Ferrofluid Orb (Magnetic Spikes & Gimbal Flux Rings)
+    if (this.ferrofluidGroup.visible) {
+      if (this.ferrofluidOrb) {
+        this.ferrofluidOrb.rotation.y = elapsedTime * 0.4;
+        this.ferrofluidOrb.rotation.x = Math.sin(elapsedTime * 0.6) * 0.18;
+        const spikePulse = 1.0 + Math.sin(elapsedTime * 2.5) * 0.08 * this.userParam;
+        this.ferrofluidOrb.scale.set(spikePulse, spikePulse, spikePulse);
+      }
+      this.fieldRings.forEach((ring, idx) => {
+        ring.rotation.x += 0.01 * (idx + 1);
+        ring.rotation.y += 0.015 * (idx + 1);
+      });
+    }
+
+    // 6. Autonomous Director Reel Mode (Instagram Video Capture)
     if (this.isDirectorMode) {
       this.directorTime += delta;
-      
-      // Update Reel Timer UI (MM:SS)
       const mins = Math.floor(this.directorTime / 60).toString().padStart(2, '0');
       const secs = Math.floor(this.directorTime % 60).toString().padStart(2, '0');
       const timeElem = document.getElementById('director-time');
       if (timeElem) timeElem.textContent = `${mins}:${secs}`;
 
-      // Sequence Director Shots every 7 seconds
       const shotCycle = this.directorTime % 28;
       const shotLabel = document.getElementById('director-shot-label');
+      const cur = PROJECTS[this.activeProjectIndex];
 
       if (shotCycle < 7) {
-        // Shot 1: Wide Orbital Crane Sweep
-        if (shotLabel) shotLabel.textContent = 'SHOT 01: WIDE ORBITAL CRANE SWEEP';
+        if (shotLabel) shotLabel.textContent = `SHOT 01: WIDE ORBITAL CRANE // ${cur.name}`;
         const t = shotCycle / 7;
         const camAngle = t * Math.PI * 0.8;
-        this.camera.position.x = Math.sin(camAngle) * 8.5;
-        this.camera.position.z = Math.cos(camAngle) * 8.5;
-        this.camera.position.y = 1.8 + Math.sin(t * Math.PI) * 1.2;
-        this.camera.lookAt(0, 0.45, 0);
+        const rad = cur.cameraPos[2] * 1.1;
+        this.camera.position.x = Math.sin(camAngle) * rad;
+        this.camera.position.z = Math.cos(camAngle) * rad;
+        this.camera.position.y = cur.cameraPos[1] + Math.sin(t * Math.PI) * 1.0;
+        this.camera.lookAt(...cur.cameraLook);
 
       } else if (shotCycle < 14) {
-        // Shot 2: Low-Angle Gliding Track Under Rail
-        if (shotLabel) shotLabel.textContent = 'SHOT 02: LOW-ANGLE GLIDE TRACK';
+        if (shotLabel) shotLabel.textContent = `SHOT 02: LOW-ANGLE GLIDE TRACK // ${cur.name}`;
         const t = (shotCycle - 7) / 7;
-        this.camera.position.x = Math.sin(t * Math.PI * 0.5) * 4.2;
-        this.camera.position.z = 4.8 - t * 1.5;
-        this.camera.position.y = -0.2 + t * 0.8;
-        this.camera.lookAt(0, 0.8, 0);
+        this.camera.position.x = Math.sin(t * Math.PI * 0.5) * 3.5;
+        this.camera.position.z = cur.cameraPos[2] * 0.7 - t * 1.0;
+        this.camera.position.y = -0.1 + t * 0.8;
+        this.camera.lookAt(...cur.cameraLook);
 
       } else if (shotCycle < 21) {
-        // Shot 3: Macro Fabric Specular Closeup
-        if (shotLabel) shotLabel.textContent = 'SHOT 03: MACRO FABRIC SPECULAR DETAIL';
+        if (shotLabel) shotLabel.textContent = `SHOT 03: MACRO SPECULAR DETAIL // ${cur.name}`;
         const t = (shotCycle - 14) / 7;
-        this.camera.position.set(0.6, 0.8 + t * 0.6, 2.4);
-        this.camera.lookAt(0, 0.9, 0);
-
-        // Key light sweep across fabric
+        this.camera.position.set(0.5, cur.cameraPos[1] * 0.7 + t * 0.4, cur.cameraPos[2] * 0.4);
+        this.camera.lookAt(...cur.cameraLook);
         this.keyLight.position.x = Math.sin(t * Math.PI * 2) * 4.0;
 
       } else {
-        // Shot 4: Dramatic 360 Spin Showcase
-        if (shotLabel) shotLabel.textContent = 'SHOT 04: DRAMATIC 360 COUTURE SHOWCASE';
-        this.carouselAngle += 0.015;
-        this.targetCarouselAngle = this.carouselAngle;
-        this.camera.position.set(0, 1.2, 5.8);
-        this.camera.lookAt(0, 0.5, 0);
+        if (shotLabel) shotLabel.textContent = `SHOT 04: DRAMATIC 360 ROTATION // ${cur.name}`;
+        this.projectGroups[this.activeProjectIndex].rotation.y += 0.015;
+        this.camera.position.set(0, cur.cameraPos[1], cur.cameraPos[2] * 0.85);
+        this.camera.lookAt(...cur.cameraLook);
       }
     }
 
@@ -806,7 +1035,6 @@ class StudioApp {
   }
 }
 
-// Initialize on DOM ready
 window.addEventListener('DOMContentLoaded', () => {
   new StudioApp();
 });

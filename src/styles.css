@@ -206,6 +206,61 @@ body.director-mode-active .letterbox-bar {
   letter-spacing: 0.08em;
 }
 
+/* Global Project Switcher Navigation */
+.project-switcher-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 4px 6px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  pointer-events: auto;
+}
+
+.project-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--silver-400);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.project-switch-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.project-switch-btn.active {
+  background: rgba(200, 162, 101, 0.16);
+  border-color: rgba(200, 162, 101, 0.45);
+  color: #fff;
+}
+
+.project-switch-btn.active .proj-num {
+  color: var(--gold-accent);
+}
+
+.proj-num {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--silver-600);
+}
+
+.proj-name {
+  font-weight: 600;
+}
+
 .pulse-indicator {
   width: 6px;
   height: 6px;
